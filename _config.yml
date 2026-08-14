@@ -1,4 +1,4 @@
-theme: dinky
+remote_theme: pages-themes/dinky@v0.2.0
 
 title: ARQ-COMP
 description: Competition on Automated Reasoning for Quantum
