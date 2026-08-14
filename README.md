@@ -1,2 +1,2 @@
 # arq-comp.github.io
-Automated Reasoning for Quantum Competition (ARQ-Comp) web page
+Competition in Automated Reasoning for Quantum (ARQ-COMP) web page
