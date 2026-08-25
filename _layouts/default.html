@@ -19,6 +19,11 @@
         <h1 class="header">{{ site.title | default: site.github.repository_name }}</h1>
         <p class="header">{{ site.description | default: site.github.project_tagline }}</p>
 
+        <ul class="nav">
+          <li><a href="{{ '/' | relative_url }}">Home</a></li>
+          <li><a href="{{ '/submit-benchmarks/' | relative_url }}">Submit Benchmarks</a></li>
+        </ul>
+
         {% if site.show_downloads %}
           <ul>
             <li class="download"><a class="buttons" href="{{ site.github.zip_url }}">Download ZIP</a></li>
