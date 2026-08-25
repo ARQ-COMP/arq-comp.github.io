@@ -18,3 +18,17 @@ footer {
   width: 240px;
   padding-left: 30px;
 }
+
+header ul.nav li {
+  background: none;
+  border: none;
+  box-shadow: none;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+header ul.nav li a {
+  color: #fff;
+}
