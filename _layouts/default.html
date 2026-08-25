@@ -16,8 +16,6 @@
   <body>
     <div class="wrapper">
       <header>
-        <img src="{{ '/logo/logo6-fixed.png' | relative_url }}" alt="{{ site.title }} logo" class="header-logo">
-
         <h1 class="header">{{ site.title | default: site.github.repository_name }}</h1>
         <p class="header">{{ site.description | default: site.github.project_tagline }}</p>
 
@@ -30,6 +28,10 @@
       <section>
         {{ content }}
       </section>
+
+      <footer>
+        <img src="{{ '/logo/logo6-fixed.png' | relative_url }}" alt="{{ site.title }} logo" class="header-logo">
+      </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
   </body>
