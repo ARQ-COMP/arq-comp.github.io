@@ -1,0 +1,20 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+header {
+  background-color: #0b2545;
+  width: 240px;
+  padding-left: 30px;
+  padding-right: 15px;
+}
+
+section {
+  width: 600px;
+}
+
+footer {
+  width: 240px;
+  padding-left: 30px;
+}
