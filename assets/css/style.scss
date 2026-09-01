@@ -25,7 +25,12 @@
   --heading:        #232323;
   --muted:          #444;
   --rule:           #ccc;
-  --link:           #C30000;
+
+  /* Dinky's link red (#C30000) is dropped site-wide. Navy-violet picks up the
+     sidebar navy and the logo's navy-to-purple gradient, so links are no longer
+     the only red on the page; it also reads 9.11:1 here against 6.06:1 for the
+     red. The dark counterpart is in @mixin dark-tokens. */
+  --link:           #3B3B8F;
 
   --surface:        #FDFEFB;
   --surface-border: #D7D8C8;
@@ -47,7 +52,7 @@
   --heading:        #f2f5f9;
   --muted:          #98a1ae;
   --rule:           #2a303b;
-  --link:           #ff6f62;   /* Dinky's #C30000 is unreadable on this ground */
+  --link:           #C9A6FF;   /* counterpart to --link in light-tokens; 9.12:1 here */
 
   --surface:        #191d25;
   --surface-border: #2a303b;

@@ -51,6 +51,45 @@ gradient direction and alpha are preserved, so it is the same mark rather than
 an inversion. Regenerating it means redoing that transform, not editing the PNG
 by hand.
 
+## Icons
+
+`assets/icons/` holds the Bloch sphere cropped out of the logo, in a light and a
+dark variant apiece. The layout offers each pair through a `media` query for
+`prefers-color-scheme` on the `<link rel="icon">`, so the browser picks one — the
+mark is tinted artwork, and a single version disappears against one chrome or
+the other.
+
+| File | Where it is used |
+| --- | --- |
+| `favicon-32-{light,dark}.png` | The tab strip |
+| `icon-180-{light,dark}.png` | Bookmarks and high-DPI tabs |
+| `apple-touch-icon.png` | iOS home screen; opaque, no alpha |
+
+Both sizes are derived from the 1254px masters in `logo/`, and two things about
+that derivation are easy to get wrong:
+
+- **A plain area-average downscale destroys the mark.** The wireframe is
+  sub-pixel thin at 32px, so averaging spreads each stroke's alpha across its
+  whole block: the first version of these icons ended up with a mean alpha of
+  24/255 and a single pixel above 159, which is invisible on any background.
+  Coverage has to lean on the *maximum* alpha in each block, not the mean, or
+  thin strokes do not survive. The current 32px pair takes
+  `max(mean * 8.0, blockmax * 0.25)`; weighting the mean term that much higher
+  than the max keeps the continuous strokes dominant and leaves the dashed guide
+  ellipses subdued, which is what stops the icon reading as a busy ball.
+- **The framing is size-specific, deliberately.** The 32px pair is cropped to
+  the sphere alone — a square of half-width 336 about (619, 515) in the master,
+  which is the circle's radius of 327 plus a 9px margin. The axis labels (`z`,
+  `x`, `y`, `|0>`, `|1>`) are illegible at that size and only spend contrast, so
+  they are cropped away. The 180px pair keeps the wider framing that includes
+  them, matching `apple-touch-icon.png`; the tight crop would chop the `z`
+  arrowhead there.
+
+The dark variants also get their ink lifted 25% toward white, on top of the HLS
+remap the footer logo uses. That remap was tuned against the page ground
+(`#11141a`), and a browser's dark tab strip is much lighter — Chrome's is about
+`#35363a` — so the footer tone alone lands under 4.5:1 there.
+
 ## Colour theme
 
 The site follows the visitor's OS setting by default and offers a Light/Dark
