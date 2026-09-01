@@ -209,21 +209,23 @@ header ul.nav li a {
 }
 
 /* ==========================================================================
-   Theme control -- a Light <-> Dark switch, icon only.
+   Sidebar action row -- the GitHub link and the Light/Dark switch.
 
    The separator repeats the rule above the nav, so the sidebar reads as three
-   banded groups (identity / nav / control) rather than a list with something
+   banded groups (identity / nav / actions) rather than a list with something
    appended. Its 12px padding matches the nav's, and header ul.nav above trims
    its margin to 12px so the gap below the last link equals the 22px above the
    first rule -- the two bands sit symmetrically.
    ========================================================================== */
 
-.theme-switch {
+.sidebar-actions {
+  display: flex;
+  gap: 8px;
   border-top: 1px solid var(--sidebar-rule);
   padding-top: 12px;
 }
 
-.theme-toggle {
+.icon-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -240,16 +242,39 @@ header ul.nav li a {
   -webkit-font-smoothing: antialiased;
 }
 
-.theme-toggle:hover {
+/* One is a <button>, the other an <a>; without this the theme's `a` rule
+   colours the link red and underlines it on hover. */
+a.icon-button,
+a.icon-button:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* display:inline-flex would otherwise defeat the [hidden] attribute, which is
+   what keeps the theme button out of the row until the script wakes it up. */
+.icon-button[hidden] {
+  display: none;
+}
+
+.icon-button:hover {
   background: rgba(255, 255, 255, 0.16);
 }
 
-.theme-toggle:focus-visible {
+.icon-button:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 2px;
 }
 
-.theme-toggle .theme-toggle-icon {
+/* The theme's `img`/svg rules add borders and margins to media in content;
+   these glyphs are chrome, not content. */
+.icon-button svg {
+  display: block;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.icon-button .theme-toggle-icon {
   /* Optical, not metric: the crescent sits high in its em box, so a nudge down
      centres it in the square the way the sun already is. */
   font-size: 15px;
@@ -287,5 +312,5 @@ header ul.nav li a {
 
   /* The whole group, not just the button -- otherwise the separator prints as
      a rule with nothing beneath it. */
-  .theme-switch { display: none; }
+  .sidebar-actions { display: none; }
 }

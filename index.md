@@ -32,20 +32,17 @@ are decided.
 See [Submit Benchmarks]({{ '/submit-benchmarks/' | relative_url }}) for what a
 submission should look like.
 
-## Organizers
-
-- [Johannes K. Fichte](https://liu.se/en/employee/johfi52)
-- [Ondřej Lengál](https://ondrik.github.io/)
-
 ## Communication
 
 Announcements and discussion happen on the
 [ARQ-COMP mailing list](https://groups.google.com/g/arq-comp) — subscribe there
 to follow the competition.
 
-Work on the competition itself is in the
-[ARQ-COMP organisation on GitHub](https://github.com/ARQ-COMP).
-
 ## News
 
 Nothing to report yet.
+
+## Organizers
+
+- [Johannes K. Fichte](https://liu.se/en/employee/johfi52)
+- [Ondřej Lengál](https://ondrik.github.io/)
