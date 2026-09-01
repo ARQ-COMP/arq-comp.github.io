@@ -1,9 +1,13 @@
 ---
 layout: default
-# No `title:` here on purpose. jekyll-seo-tag then builds <title> from
-# _config.yml as "ARQ-COMP | Competition on Automated Reasoning for Quantum",
-# instead of the doubled "ARQ-COMP 2027 | ARQ-COMP" that a page title produces
-# on the homepage.
+# `title` must match site.title exactly. jekyll-seo-tag only falls back to
+# "<site.title> | <site.description>" when the two are equal; give the page any
+# other title and it emits the doubled "<page title> | ARQ-COMP" instead.
+#
+# Leaving `title` out does not work: jekyll-titles-from-headings, which GitHub
+# Pages enables by default, would lift the "ARQ-COMP 2027" heading below into
+# page.title and reintroduce the doubling.
+title: ARQ-COMP
 #
 # Still a stub: call for participation, tracks, key dates, rules, organisers
 # and how to enter belong below, as they are decided.

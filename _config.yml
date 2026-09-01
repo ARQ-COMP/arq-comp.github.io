@@ -6,6 +6,10 @@ remote_theme: pages-themes/dinky@v0.2.0
 plugins:
   - jekyll-remote-theme
   - jekyll-seo-tag
+  # Pages enables this one whether or not it is listed. It is here so a local
+  # build behaves the same: it lifts a page's first heading into page.title,
+  # which changes what jekyll-seo-tag emits.
+  - jekyll-titles-from-headings
 
 title: ARQ-COMP
 description: Competition on Automated Reasoning for Quantum

@@ -18,6 +18,10 @@ group :jekyll_plugins do
   # this group is what makes them load locally.
   gem "jekyll-remote-theme", "~> 0.4"
   gem "jekyll-seo-tag", "~> 2.8"
+  # Not optional for fidelity: GitHub Pages enables this by default, and it
+  # changes page titles. Without it locally, a local build reports a different
+  # <title> than production.
+  gem "jekyll-titles-from-headings", "~> 0.5"
 end
 
 # Dropped from Ruby's standard library in 3.0; `jekyll serve` needs it.
