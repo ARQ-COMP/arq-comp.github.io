@@ -12,6 +12,8 @@ homepage is [`index.md`](index.md).
 | --- | --- |
 | `index.md` | The homepage |
 | `submit-benchmarks.md` | The Submit Benchmarks page (`permalink: /submit-benchmarks/`) |
+| `404.md` | Served by GitHub Pages for any missing path (`permalink: /404.html`) |
+| `assets/icons/` | Favicons — the Bloch sphere cropped out of the logo, light and dark |
 | `_config.yml` | Site config, and the `exclude:` list that keeps drafts off the live site |
 | `_layouts/default.html` | Page shell — sidebar, nav, theme switch. Forked from the Dinky theme's own layout |
 | `assets/css/style.scss` | All styling: theme tokens, dark mode, and the overrides on top of Dinky |

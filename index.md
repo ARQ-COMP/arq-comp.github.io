@@ -9,14 +9,40 @@ layout: default
 # page.title and reintroduce the doubling.
 title: ARQ-COMP
 #
-# Still a stub: call for participation, tracks, key dates, rules, organisers
-# and how to enter belong below, as they are decided.
+# Every "To be announced" below is a real gap, not filler -- replace them as
+# each is settled. Add news items to the top of the News list, newest first.
 ---
 
 # ARQ-COMP 2027
 
 The Competition on Automated Reasoning for Quantum.
 
-🚧 This page is a work in progress — more information will appear soon.
+🚧 This page is a work in progress — the details below will be filled in as they
+are decided.
 
-In the meantime, see [Submit Benchmarks]({{ '/submit-benchmarks/' | relative_url }}).
+## Important Dates
+
+| Milestone | Date |
+| --- | --- |
+| Call for benchmarks | To be announced |
+| Benchmark submission deadline | To be announced |
+| Tool submission deadline | To be announced |
+| Results announced | To be announced |
+
+See [Submit Benchmarks]({{ '/submit-benchmarks/' | relative_url }}) for what a
+submission should look like.
+
+## Organizers
+
+To be announced.
+
+## Communication
+
+To be announced.
+
+Until a mailing list exists, the competition's work happens in the
+[ARQ-COMP organisation on GitHub](https://github.com/ARQ-COMP).
+
+## News
+
+Nothing to report yet.
