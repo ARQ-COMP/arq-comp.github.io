@@ -26,8 +26,10 @@ url: https://arq-comp.github.io
 # so Gemfile and friends stay excluded.
 exclude:
   # Repository documentation, not site content. Without this, GitHub Pages'
-  # jekyll-optional-front-matter would publish it at /README.html.
+  # jekyll-optional-front-matter would publish them at /README.html and
+  # /CLAUDE.html.
   - README.md
+  - CLAUDE.md
 
   - logo/logo1.png
   - logo/logo2.png
