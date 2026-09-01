@@ -96,17 +96,10 @@ make clean
 
 There is no CI on this repository. GitHub Pages builds on push and, if the
 build fails, simply does not publish — so a broken build shows up as the site
-quietly going stale rather than as an error.
+quietly going stale rather than as an error. (GitHub does email the pusher
+about a failed Pages build.)
 
-`make check` is the guard. To have it run automatically, enable the hook once
-per clone:
-
-```sh
-git config core.hooksPath .githooks
-```
-
-`.githooks/pre-push` then refuses a push whose build fails. Bypass it for a
-single push with `git push --no-verify`.
+Running `make check` before pushing is the cheap way to avoid that.
 
 ## Deploying
 

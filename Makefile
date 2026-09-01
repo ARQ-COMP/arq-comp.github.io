@@ -1,6 +1,6 @@
 # Local helpers. There is no CI on this repository by design -- `make check`
-# is the check that would otherwise have run there, and .githooks/pre-push
-# runs it automatically if you opt in (see README).
+# is the check that would otherwise have run there. Worth running before a
+# push: a failed Pages build does not publish, it just leaves the site stale.
 
 .PHONY: serve build check clean
 
