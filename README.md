@@ -16,6 +16,7 @@ homepage is [`index.md`](index.md).
 | `_layouts/default.html` | Page shell — sidebar, nav, theme switch. Forked from the Dinky theme's own layout |
 | `assets/css/style.scss` | All styling: theme tokens, dark mode, and the overrides on top of Dinky |
 | `logo/` | Logo artwork — see below |
+| `Gemfile`, `Gemfile.lock` | Local previews only; GitHub Pages ignores both |
 
 The theme is [Dinky](https://github.com/pages-themes/dinky), pinned via
 `remote_theme: pages-themes/dinky@v0.2.0`. Everything in `assets/css/style.scss`
@@ -83,20 +84,16 @@ Needs a reasonably current Ruby (3.2+) and network access on first run, since
 > not used: it pins a 2013-era dependency tree whose native extensions no
 > longer compile, so `bundle install` fails outright with it.
 
-This is only an escape hatch for checking a CSS or layout change before it is
-public — the published site is always built and served by GitHub.
-
-## Checking before you push
-
-There is no CI on this repository. GitHub Pages builds on push and, if the
-build fails, simply does not publish — so a broken build shows up as the site
-quietly going stale rather than as an error. (GitHub does email the pusher
-about a failed Pages build.)
-
-`bundle exec jekyll build --strict_front_matter` is the cheap check if you have
-touched anything structural.
+This is only an escape hatch for checking a change before it is public — the
+published site is always built and served by GitHub.
 
 ## Deploying
 
 Push to `master`. GitHub Pages builds and publishes automatically, usually
 within a minute.
+
+Nothing else checks the build first. If it fails, Pages simply does not
+publish, so breakage looks like the site going stale rather than like an error
+— though GitHub does email whoever pushed. Running `bundle exec jekyll build`
+once beforehand avoids that, and is worth it if you have touched the layout,
+the stylesheet or a page's front matter.
