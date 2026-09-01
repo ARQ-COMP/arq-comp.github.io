@@ -60,13 +60,20 @@
       </section>
 
       <footer>
-        <!-- The -512 files are the web-sized versions; logo6-fixed.png and
-             logo6-dark.png are kept alongside as the full-resolution sources.
-             Only one of these is ever displayed; display:none keeps the other
-             out of the accessibility tree, so the shared alt text is not read
-             twice. -->
-        <img src="{{ '/logo/logo6-fixed-512.png' | relative_url }}" alt="{{ site.title }} logo" width="512" height="512" class="header-logo logo-light">
-        <img src="{{ '/logo/logo6-dark-512.png' | relative_url }}" alt="{{ site.title }} logo" width="512" height="512" class="header-logo logo-dark">
+        {% comment %}
+          Only one of the pair is ever displayed; display:none also keeps the
+          other out of the accessibility tree, so the shared alt text is not
+          announced twice.
+
+          loading="lazy" is what stops both being downloaded. A hidden image is
+          never in the viewport, so the lazy algorithm skips it entirely, while
+          the visible one is in view at load and fetches immediately. Which of
+          the two is hidden depends on the theme and is only known at runtime,
+          so the attribute has to be on both. A browser that ignores the hint
+          just fetches both, exactly as before.
+        {% endcomment %}
+        <img src="{{ '/logo/logo6-fixed-512.png' | relative_url }}" alt="{{ site.title }} logo" width="512" height="512" loading="lazy" decoding="async" class="header-logo logo-light">
+        <img src="{{ '/logo/logo6-dark-512.png' | relative_url }}" alt="{{ site.title }} logo" width="512" height="512" loading="lazy" decoding="async" class="header-logo logo-dark">
       </footer>
     </div>
     <script>

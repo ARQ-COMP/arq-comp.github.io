@@ -158,18 +158,29 @@ td {                                      /* 204 */
 header {
   background-color: var(--sidebar-bg);
   border-color: var(--sidebar-border);
-  width: 240px;
-  padding-left: 30px;
-  padding-right: 15px;
 }
 
-section {
-  width: 600px;
-}
+/* The two-column layout, and ONLY at a width that has room for it.
+   These must stay scoped. Dinky collapses to a single column with
+   `header, section, footer { width: auto }` inside its own 960px breakpoint;
+   unconditional width rules here would sit later in the compiled stylesheet at
+   identical specificity, beat that reset at every viewport, and force ~900px
+   of minimum width on a phone. */
+@media screen and (min-width: 961px) {
+  header {
+    width: 240px;
+    padding-left: 30px;
+    padding-right: 15px;
+  }
 
-footer {
-  width: 240px;
-  padding-left: 30px;
+  section {
+    width: 600px;
+  }
+
+  footer {
+    width: 240px;
+    padding-left: 30px;
+  }
 }
 
 .header-logo {
@@ -293,6 +304,29 @@ a.icon-button:hover {
 
 @media print, screen and (max-width: 960px) {
   footer { border-top: 1px solid var(--rule); }  /* 352 */
+
+  /* Dinky pins its nav out of flow here -- `header ul { position: absolute;
+     right: 130px; top: 84px }` (618) -- and pads the header 320px on the right
+     (359) to leave a hole for it. That is for the theme's stacked button list;
+     ours is plain links in normal flow, so both have to be undone or the nav
+     lands on top of the sidebar between 720px and 960px. */
+  header {
+    padding: 20px 30px;
+    margin-right: 0;
+    /* Full-bleed here, so the right-hand rounding Dinky gives the sidebar
+       column has nothing left to round against. */
+    border-radius: 0;
+  }
+
+  header ul.nav {
+    position: static;
+  }
+
+  /* Out of the sidebar and into the normal flow, the logo no longer needs to
+     match a 240px column. */
+  .header-logo {
+    max-width: 150px;
+  }
 }
 
 /* A dark-mode visitor should not print a black page.

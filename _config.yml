@@ -35,3 +35,9 @@ exclude:
   - logo/logo4.png
   - logo/logo5.png
   - logo/logo6.png
+
+  # The 1254px masters. The site renders the -512 exports, so these were 664 KB
+  # of the published site that no page referenced. Note this retires two URLs
+  # that had been live since August: /logo/logo6-fixed.png and /logo/logo6-dark.png.
+  - logo/logo6-fixed.png
+  - logo/logo6-dark.png
