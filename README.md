@@ -83,14 +83,8 @@ Needs a reasonably current Ruby (3.2+) and network access on first run, since
 > not used: it pins a 2013-era dependency tree whose native extensions no
 > longer compile, so `bundle install` fails outright with it.
 
-There is a `Makefile` for the usual things:
-
-```sh
-make serve   # preview at http://127.0.0.1:4000
-make build   # build once into _site/
-make check   # strict build + assert the homepage was generated
-make clean
-```
+This is only an escape hatch for checking a CSS or layout change before it is
+public — the published site is always built and served by GitHub.
 
 ## Checking before you push
 
@@ -99,7 +93,8 @@ build fails, simply does not publish — so a broken build shows up as the site
 quietly going stale rather than as an error. (GitHub does email the pusher
 about a failed Pages build.)
 
-Running `make check` before pushing is the cheap way to avoid that.
+`bundle exec jekyll build --strict_front_matter` is the cheap check if you have
+touched anything structural.
 
 ## Deploying
 
