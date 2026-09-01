@@ -83,10 +83,32 @@ Needs a reasonably current Ruby (3.2+) and network access on first run, since
 > not used: it pins a 2013-era dependency tree whose native extensions no
 > longer compile, so `bundle install` fails outright with it.
 
+There is a `Makefile` for the usual things:
+
+```sh
+make serve   # preview at http://127.0.0.1:4000
+make build   # build once into _site/
+make check   # strict build + assert the homepage was generated
+make clean
+```
+
+## Checking before you push
+
+There is no CI on this repository. GitHub Pages builds on push and, if the
+build fails, simply does not publish — so a broken build shows up as the site
+quietly going stale rather than as an error.
+
+`make check` is the guard. To have it run automatically, enable the hook once
+per clone:
+
+```sh
+git config core.hooksPath .githooks
+```
+
+`.githooks/pre-push` then refuses a push whose build fails. Bypass it for a
+single push with `git push --no-verify`.
+
 ## Deploying
 
-Push to `master`. GitHub Pages builds and publishes automatically.
-
-`.github/workflows/build.yml` also builds the site on every push and pull
-request. It **does not deploy** — it exists so a broken build fails loudly
-with a log, rather than quietly not publishing.
+Push to `master`. GitHub Pages builds and publishes automatically, usually
+within a minute.
