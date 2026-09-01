@@ -9,6 +9,10 @@ description: Competition on Automated Reasoning for Quantum
 # Jekyll concatenates this with its own defaults rather than replacing them,
 # so Gemfile and friends stay excluded.
 exclude:
+  # Repository documentation, not site content. Without this, GitHub Pages'
+  # jekyll-optional-front-matter would publish it at /README.html.
+  - README.md
+
   - logo/logo1.png
   - logo/logo2.png
   - logo/logo3.png

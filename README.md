@@ -1,4 +1,77 @@
-# ARQ-COMP 2027
-Competition in Automated Reasoning for Quantum (ARQ-COMP) web page
+# arq-comp.github.io
 
-🚧 This page is a work in progress — more information will appear soon.
+Source for the [ARQ-COMP](https://arq-comp.github.io/) website — the Competition
+on Automated Reasoning for Quantum.
+
+This file is repository documentation and is **not** published; the public
+homepage is [`index.md`](index.md).
+
+## Layout
+
+| Path | What it is |
+| --- | --- |
+| `index.md` | The homepage |
+| `submit-benchmarks.md` | The Submit Benchmarks page (`permalink: /submit-benchmarks/`) |
+| `_config.yml` | Site config, and the `exclude:` list that keeps drafts off the live site |
+| `_layouts/default.html` | Page shell — sidebar, nav, theme switch. Forked from the Dinky theme's own layout |
+| `assets/css/style.scss` | All styling: theme tokens, dark mode, and the overrides on top of Dinky |
+| `logo/` | Logo artwork — see below |
+
+The theme is [Dinky](https://github.com/pages-themes/dinky), pinned via
+`remote_theme: pages-themes/dinky@v0.2.0`. Everything in `assets/css/style.scss`
+loads *after* the theme, so overrides win on source order alone.
+
+## Adding a page
+
+1. Create `your-page.md` with front matter:
+   ```yaml
+   ---
+   layout: default
+   title: Your Page
+   permalink: /your-page/
+   ---
+   ```
+2. Add a link to the sidebar list in `_layouts/default.html` — the nav is
+   currently hardcoded there.
+
+## Logos
+
+| File | Role |
+| --- | --- |
+| `logo6-fixed-512.png` | Light mode, used by the site |
+| `logo6-dark-512.png` | Dark mode, used by the site |
+| `logo6-fixed.png`, `logo6-dark.png` | Full-resolution sources (1254px) |
+| `logo1`–`logo5`, `logo6` | Superseded drafts, excluded from the build |
+
+The dark variant is the light one with its lightness remapped in HLS; hue,
+gradient direction and alpha are preserved, so it is the same mark rather than
+an inversion. Regenerating it means redoing that transform, not editing the PNG
+by hand.
+
+## Colour theme
+
+The site follows the visitor's OS setting by default and offers a Light/Dark
+switch in the sidebar. There are three CSS states, which is what makes that
+work:
+
+- `:root` — light
+- `:root:not([data-theme="light"])` inside `@media (prefers-color-scheme: dark)` — the OS default
+- `:root[data-theme="dark"]` — an explicit choice, which beats the OS
+
+No `data-theme` attribute means "follow the OS". The choice is stored in
+`localStorage` under `arq-theme`; an inline snippet in `<head>` applies it
+before first paint so there is no flash of the light page.
+
+## Building locally
+
+```sh
+bundle install
+bundle exec jekyll serve   # http://127.0.0.1:4000
+```
+
+> [!WARNING]
+> **This currently does not work.** Bundler back-resolves `github-pages` to v15
+> (Jekyll 1.4.3, from 2013) and its native extensions fail to build on modern
+> Ruby, while the versions pinned in `Gemfile.lock` are not installable either.
+> Until it is fixed, changes are only visible once pushed — GitHub Pages builds
+> from `master` on push.
