@@ -34,13 +34,16 @@ submission should look like.
 
 ## Organizers
 
-To be announced.
+- [Johannes K. Fichte](https://liu.se/en/employee/johfi52)
+- [Ondřej Lengál](https://ondrik.github.io/)
 
 ## Communication
 
-To be announced.
+Announcements and discussion happen on the
+[ARQ-COMP mailing list](https://groups.google.com/g/arq-comp) — subscribe there
+to follow the competition.
 
-Until a mailing list exists, the competition's work happens in the
+Work on the competition itself is in the
 [ARQ-COMP organisation on GitHub](https://github.com/ARQ-COMP).
 
 ## News
