@@ -3,8 +3,161 @@
 
 @import "{{ site.theme }}";
 
+/* ==========================================================================
+   Theme tokens
+
+   Dinky hardcodes its colours as literals, so there is no variable layer to
+   retheme. We add one here and restate the affected theme rules below using
+   var(). Everything in this file comes after the @import, so plain source
+   order wins the cascade -- no !important, no specificity tricks.
+
+   Three states, not two:
+     :root                              -> light
+     no [data-theme] + OS dark          -> dark   (the default: "System")
+     [data-theme="light"|"dark"]        -> the visitor's explicit override
+   ========================================================================== */
+
+@mixin light-tokens {
+  color-scheme: light;
+
+  --page-bg:        #FBFAF7;
+  --text:           #232323;
+  --heading:        #232323;
+  --muted:          #444;
+  --rule:           #ccc;
+  --link:           #C30000;
+
+  --surface:        #FDFEFB;
+  --surface-border: #D7D8C8;
+  --code-fg:        #000;
+  --th-bg:          #232323;
+  --th-fg:          #FDFEFB;
+  --td-bg:          #ccc;
+
+  --sidebar-bg:     #0b2545;
+  --sidebar-border: #000;
+  --sidebar-rule:   #fff;
+}
+
+@mixin dark-tokens {
+  color-scheme: dark;
+
+  --page-bg:        #11141a;
+  --text:           #d5dae2;
+  --heading:        #f2f5f9;
+  --muted:          #98a1ae;
+  --rule:           #2a303b;
+  --link:           #ff6f62;   /* Dinky's #C30000 is unreadable on this ground */
+
+  --surface:        #191d25;
+  --surface-border: #2a303b;
+  --code-fg:        #e3e7ee;
+  --th-bg:          #222833;
+  --th-fg:          #f2f5f9;
+  --td-bg:          #191d25;
+
+  --sidebar-bg:     #191d25;
+  --sidebar-border: #2a303b;
+  --sidebar-rule:   rgba(255, 255, 255, 0.22);
+}
+
+/* The logo is dark navy-to-purple artwork on transparency, and it sits in the
+   footer -- on the page ground, not on the sidebar -- so on a near-black page
+   the navy end would disappear. logo6-dark.png is the same mark with its
+   lightness lifted into a band that reads on dark; hue, gradient direction and
+   alpha are untouched, so it is the same logo, not an inversion.
+
+   Swapped by CSS rather than <picture>, because <picture> can only branch on
+   the media query and would miss a visitor who forces dark on a light OS. */
+@mixin dark-logo {
+  .logo-light { display: none; }
+  .logo-dark  { display: block; }
+}
+
+/* Dark syntax highlighting. Scoped to the dark contexts rather than driven by
+   tokens, so light mode keeps Dinky's per-token rouge colours untouched. */
+@mixin dark-syntax {
+  .highlight {
+    .c, .cd, .cm, .c1, .cs, .cp            { color: #7c8695; }
+    .k, .kc, .kd, .kn, .kp, .kr, .kt, .kv  { color: #b98cff; }
+    .s, .s1, .s2, .sb, .sc, .sd, .se,
+    .sh, .si, .sx, .sr, .ss                { color: #8fd6a4; }
+    .m, .mb, .mf, .mh, .mi, .mo, .mx, .il  { color: #f2a25c; }
+    .na, .nb, .bp, .nc, .nd, .ne, .nf, .ni,
+    .nl, .nn, .no, .nt, .nv, .vc, .vg, .vi { color: #7fb2e5; }
+    .o, .ow                                { color: #d5dae2; }
+    .gh, .gu                               { color: #98a1ae; }
+    .err { color: #ff9b91; background-color: #3a1f1f; }
+    .gd  { color: #ffb3ad; background-color: #3a1f22; }
+    .gi  { color: #a5e0b0; background-color: #16321f; }
+  }
+}
+
+:root { @include light-tokens; }
+
+/* System dark -- unless the visitor explicitly asked for light. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include dark-tokens;
+    @include dark-syntax;
+    @include dark-logo;
+  }
+}
+
+/* Explicit dark -- wins even on a light OS. */
+:root[data-theme="dark"] {
+  @include dark-tokens;
+  @include dark-syntax;
+  @include dark-logo;
+}
+
+/* ==========================================================================
+   Theme rules restated through the tokens
+   (line refs are into the theme's _sass/jekyll-theme-dinky.scss)
+   ========================================================================== */
+
+body {                                  /* 29 */
+  color: var(--text);
+  background-color: var(--page-bg);
+}
+
+h1, h2, h3, h4, h5, h6 { color: var(--heading); }   /* 41 */
+h1, h2, h3 { border-bottom: 1px solid var(--rule); } /* 56 */
+
+a { color: var(--link); }               /* 79 */
+
+dl, dt, dd, dl p { color: var(--muted); } /* 119 */
+
+hr { background: var(--rule); }         /* 137 */
+
+img { border: 1px solid var(--rule); }  /* 146 */
+
+code, pre { color: var(--code-fg); }    /* 166 */
+
+pre {                                   /* 172 */
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+}
+
+table { border: 1px solid var(--rule); }  /* 189 */
+
+th {                                      /* 195 */
+  background: var(--th-bg);
+  color: var(--th-fg);
+}
+
+td {                                      /* 204 */
+  background: var(--td-bg);
+  color: var(--text);
+}
+
+/* ==========================================================================
+   Site layout
+   ========================================================================== */
+
 header {
-  background-color: #0b2545;
+  background-color: var(--sidebar-bg);
+  border-color: var(--sidebar-border);
   width: 240px;
   padding-left: 30px;
   padding-right: 15px;
@@ -30,9 +183,14 @@ footer {
   border-radius: 4px;
 }
 
+/* Light is the default; @mixin dark-logo flips the pair. */
+.logo-dark { display: none; }
+
 header ul.nav {
-  border-top: 1px solid #fff;
+  border-top: 1px solid var(--sidebar-rule);
   padding-top: 12px;
+  /* 12px here + the last link's 10px margin = the 22px above the nav's rule. */
+  margin-bottom: 12px;
 }
 
 header ul.nav li {
@@ -48,4 +206,86 @@ header ul.nav li {
 header ul.nav li a {
   color: #fff;
   font-weight: bold;
+}
+
+/* ==========================================================================
+   Theme control -- a Light <-> Dark switch, icon only.
+
+   The separator repeats the rule above the nav, so the sidebar reads as three
+   banded groups (identity / nav / control) rather than a list with something
+   appended. Its 12px padding matches the nav's, and header ul.nav above trims
+   its margin to 12px so the gap below the last link equals the 22px above the
+   first rule -- the two bands sit symmetrically.
+   ========================================================================== */
+
+.theme-switch {
+  border-top: 1px solid var(--sidebar-rule);
+  padding-top: 12px;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  /* Translucent, so one rule reads correctly on both the navy sidebar and the
+     neutral one. */
+  color: #fff;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.theme-toggle .theme-toggle-icon {
+  /* Optical, not metric: the crescent sits high in its em box, so a nudge down
+     centres it in the square the way the sun already is. */
+  font-size: 15px;
+  line-height: 1;
+  transform: translateY(0.5px);
+}
+
+/* ==========================================================================
+   Breakpoint + print fixes
+   ========================================================================== */
+
+@media print, screen and (max-width: 960px) {
+  footer { border-top: 1px solid var(--rule); }  /* 352 */
+}
+
+/* A dark-mode visitor should not print a black page.
+   Every selector that can carry the dark palette has to be named here and
+   matched for specificity, not just outranked by source order:
+   prefers-color-scheme applies while printing too, so on a dark-OS machine
+   :root:not([data-theme="light"]) (0,2,0) would otherwise beat a bare :root. */
+@media print {
+  :root,
+  :root:not([data-theme="light"]),
+  :root[data-theme="dark"],
+  :root[data-theme="light"] { @include light-tokens; }
+
+  /* Same reasoning for the logo pair, which is swapped by selector, not token. */
+  :root .logo-dark,
+  :root:not([data-theme="light"]) .logo-dark,
+  :root[data-theme="dark"] .logo-dark { display: none; }
+
+  :root .logo-light,
+  :root:not([data-theme="light"]) .logo-light,
+  :root[data-theme="dark"] .logo-light { display: block; }
+
+  /* The whole group, not just the button -- otherwise the separator prints as
+     a rule with nothing beneath it. */
+  .theme-switch { display: none; }
 }

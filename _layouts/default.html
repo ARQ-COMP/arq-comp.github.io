@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <!-- Applies a stored theme choice before first paint, so dark-mode
+         visitors never see a flash of the light page. Must stay inline. -->
+    <script>(function(){try{var t=localStorage.getItem('arq-theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+
 {% seo %}
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
@@ -23,6 +27,17 @@
           <li><a href="{{ '/' | relative_url }}">Home</a></li>
           <li><a href="{{ '/submit-benchmarks/' | relative_url }}">Submit Benchmarks</a></li>
         </ul>
+
+        <!-- The whole group is hidden until scripted -- without JS the page
+             still follows the OS via CSS, but the button would be inert, and a
+             separator rule with nothing under it would just look broken.
+             The glyph below is a placeholder; the script sets the real one,
+             along with the accessible name that replaces the removed text. -->
+        <div class="theme-switch" id="theme-switch" hidden>
+          <button type="button" id="theme-toggle" class="theme-toggle">
+            <span class="theme-toggle-icon" aria-hidden="true">&#x2600;&#xFE0E;</span>
+          </button>
+        </div>
       </header>
 
       <section>
@@ -30,9 +45,73 @@
       </section>
 
       <footer>
-        <img src="{{ '/logo/logo6-fixed.png' | relative_url }}" alt="{{ site.title }} logo" class="header-logo">
+        <!-- The -512 files are the web-sized versions; logo6-fixed.png and
+             logo6-dark.png are kept alongside as the full-resolution sources.
+             Only one of these is ever displayed; display:none keeps the other
+             out of the accessibility tree, so the shared alt text is not read
+             twice. -->
+        <img src="{{ '/logo/logo6-fixed-512.png' | relative_url }}" alt="{{ site.title }} logo" width="512" height="512" class="header-logo logo-light">
+        <img src="{{ '/logo/logo6-dark-512.png' | relative_url }}" alt="{{ site.title }} logo" width="512" height="512" class="header-logo logo-dark">
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    <script>
+      // Theme control: a plain Light <-> Dark switch.
+      //
+      // Until it is used, no data-theme attribute is set and nothing is
+      // stored, so prefers-color-scheme decides -- that is the default, and it
+      // keeps tracking the OS live. The button only reports which theme is
+      // currently in effect; the first click is what makes a choice explicit.
+      (function () {
+        var KEY = 'arq-theme';
+        // U+FE0E is the text variation selector: it keeps the sun a line glyph
+        // on platforms that would otherwise substitute a colour emoji.
+        var ICONS = { light: '☀︎', dark: '☾' };
+        var NAMES = { light: 'Light', dark: 'Dark' };
+        var OTHER = { light: 'Dark', dark: 'Light' };
+
+        var wrap = document.getElementById('theme-switch');
+        var btn = document.getElementById('theme-toggle');
+        if (!wrap || !btn) { return; }
+        var icon = btn.querySelector('.theme-toggle-icon');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+        var stored = null;
+        try {
+          var s = localStorage.getItem(KEY);
+          if (s === 'light' || s === 'dark') { stored = s; }
+        } catch (e) {}
+
+        function current() {
+          return stored || (prefersDark.matches ? 'dark' : 'light');
+        }
+
+        // With the text label gone, the accessible name and the hover tooltip
+        // are the only things naming the control -- so both are kept current.
+        function render() {
+          var mode = current();
+          icon.textContent = ICONS[mode];
+          btn.setAttribute('aria-label',
+            'Colour theme: ' + NAMES[mode] + '. Activate to switch to ' + OTHER[mode] + '.');
+          btn.setAttribute('title', 'Switch to ' + OTHER[mode].toLowerCase() + ' theme');
+        }
+
+        btn.addEventListener('click', function () {
+          stored = current() === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', stored);
+          try { localStorage.setItem(KEY, stored); } catch (e) {}
+          render();
+        });
+
+        // While no choice has been made, the label has to follow the OS.
+        prefersDark.addEventListener('change', function () {
+          if (!stored) { render(); }
+        });
+
+        render();
+        wrap.hidden = false;
+      })();
+    </script>
   </body>
 </html>
