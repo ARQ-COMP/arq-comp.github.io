@@ -128,6 +128,71 @@ Needs a reasonably current Ruby (3.2+) and network access on first run, since
 This is only an escape hatch for checking a change before it is public — the
 published site is always built and served by GitHub.
 
+## Verifying a visual change
+
+There is no browser automation configured. What works is driving a local
+headless Chromium over the DevTools protocol. On Ubuntu, Chromium is a snap
+(`sudo snap install chromium`); the `chromium` apt package no longer exists and
+`chromium-browser` is only a shim for the snap.
+
+For a plain screenshot, the one-shot flag is enough:
+
+```sh
+bundle exec jekyll serve --port 4321 --detach
+mkdir -p "$HOME/cdp-work"
+chromium --headless --no-sandbox --disable-gpu \
+  --screenshot="$HOME/cdp-work/home.png" --window-size=1100,820 \
+  http://127.0.0.1:4321/
+```
+
+Spell that path with `$HOME`, not `~`: the shell does not expand a tilde after
+an `=` in an argument, so `--screenshot=~/cdp-work/home.png` reaches Chromium
+literally and writes nothing.
+
+For anything the flag cannot express — emulating `prefers-color-scheme`,
+resizing to a phone viewport, reading computed styles — start Chromium with
+`--remote-debugging-port=9222`, take the page target from
+`http://127.0.0.1:9222/json/list`, and speak CDP to its WebSocket. A ~90-line
+stdlib-only client is enough (`socket` plus manual frame masking); no
+`websocket` or `playwright` package is installed. The useful calls are
+`Emulation.setDeviceMetricsOverride`, `Emulation.setEmulatedMedia` for
+`prefers-color-scheme`, `Runtime.evaluate` for computed styles and rects,
+`Page.captureScreenshot`, and `Network.enable` with `Network.requestWillBeSent`
+to see what actually gets fetched.
+
+Four things will waste your time, in rough order of how long they cost:
+
+- **Do not settle on `document.readyState` alone after `Page.navigate`.**
+  `about:blank` is *already* `"complete"`, so a poll started right after the
+  navigate returns on its first iteration and you screenshot and measure the
+  previous page. This reads exactly like a broken stylesheet: computed link
+  colour comes back as the UA default `rgb(0, 0, 238)` and `body` as
+  `rgba(0, 0, 0, 0)`. Require the location to have actually changed and
+  `document.styleSheets.length > 0` as well.
+- **The snap can only see non-hidden paths under `$HOME`.** `/tmp` and any
+  dotted directory are invisible to it. So `--screenshot=/tmp/x.png` exits 0 and
+  silently writes nothing (the reason is in stderr: `Failed to write file ...
+  Permission denied`), and a `--user-data-dir` pointing at a dotted path is
+  ignored rather than honoured — the profile lands in
+  `~/snap/chromium/common/chromium` instead. A CDP client is unaffected, because
+  there *your* process writes the file, not Chromium's.
+- **Only one snap Chromium runs at a time.** Because `--user-data-dir` is
+  ignored, a second invocation collides on the shared profile's `SingletonLock`
+  and aborts with `Failed to create a ProcessSingleton for your profile
+  directory`. Stop the first one before launching another.
+- **`pkill -f 'remote-debugging-port=9222'` kills the shell that runs it**, since
+  the pattern matches that command's own arguments. Use `pkill -x chromium`.
+
+> [!IMPORTANT]
+> **The favicons cannot be checked this way.** They render in the browser's tab
+> strip, which is chrome, not page content — a headless screenshot captures the
+> viewport only and will never show them. Judge them by compositing the PNG onto
+> the tab-strip greys and measuring contrast (see [Icons](#icons)), then confirm
+> by opening the deployed site in a normal window and looking at the tab.
+
+To compare against what is already deployed, build a pre-change copy with
+`git archive HEAD | tar -x -C <dir>` and serve it on a second port.
+
 ## Deploying
 
 Push to `master`. GitHub Pages builds and publishes automatically, usually
