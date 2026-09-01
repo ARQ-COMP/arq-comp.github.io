@@ -220,6 +220,7 @@ header ul.nav li a {
 
 .sidebar-actions {
   display: flex;
+  align-items: center;
   gap: 8px;
   border-top: 1px solid var(--sidebar-rule);
   padding-top: 12px;
@@ -229,6 +230,10 @@ header ul.nav li a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  /* Not optional. The UA stylesheet gives <button> border-box but leaves <a>
+     at content-box, so without this the link adds its 1px border outside the
+     30px and renders 32px next to the button's 30px. */
+  box-sizing: border-box;
   width: 30px;
   height: 30px;
   padding: 0;
