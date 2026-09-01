@@ -69,9 +69,24 @@ bundle install
 bundle exec jekyll serve   # http://127.0.0.1:4000
 ```
 
-> [!WARNING]
-> **This currently does not work.** Bundler back-resolves `github-pages` to v15
-> (Jekyll 1.4.3, from 2013) and its native extensions fail to build on modern
-> Ruby, while the versions pinned in `Gemfile.lock` are not installable either.
-> Until it is fixed, changes are only visible once pushed — GitHub Pages builds
-> from `master` on push.
+Needs a reasonably current Ruby (3.2+) and network access on first run, since
+`remote_theme` fetches Dinky from GitHub.
+
+> [!NOTE]
+> **A local build is close to production, but not identical.** GitHub Pages
+> ignores this `Gemfile` and builds with its own pinned environment, still on
+> Jekyll 3.10; locally we use Jekyll 4.4. Liquid, SCSS and content behave the
+> same, so a local preview is trustworthy for anything you are likely to
+> change — but Jekyll 3-vs-4 edge cases will not show up until deploy.
+>
+> The `github-pages` metagem, which would make the two match, is deliberately
+> not used: it pins a 2013-era dependency tree whose native extensions no
+> longer compile, so `bundle install` fails outright with it.
+
+## Deploying
+
+Push to `master`. GitHub Pages builds and publishes automatically.
+
+`.github/workflows/build.yml` also builds the site on every push and pull
+request. It **does not deploy** — it exists so a broken build fails loudly
+with a log, rather than quietly not publishing.

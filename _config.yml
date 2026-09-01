@@ -1,5 +1,12 @@
 remote_theme: pages-themes/dinky@v0.2.0
 
+# GitHub Pages force-enables these, but a local build does not -- without them
+# {% seo %} in the layout is an unknown tag and the build fails. Both are on
+# the Pages plugin allowlist, so declaring them changes nothing in production.
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
 title: ARQ-COMP
 description: Competition on Automated Reasoning for Quantum
 
