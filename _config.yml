@@ -2,3 +2,16 @@ remote_theme: pages-themes/dinky@v0.2.0
 
 title: ARQ-COMP
 description: Competition on Automated Reasoning for Quantum
+
+# Superseded drafts of the logo. They are kept in the repository for
+# reference, but without this they are copied into the build and served
+# publicly -- about 5.5 MB of abandoned artwork at /logo/.
+# Jekyll concatenates this with its own defaults rather than replacing them,
+# so Gemfile and friends stay excluded.
+exclude:
+  - logo/logo1.png
+  - logo/logo2.png
+  - logo/logo3.png
+  - logo/logo4.png
+  - logo/logo5.png
+  - logo/logo6.png
