@@ -2,27 +2,47 @@
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Applies a stored theme choice before first paint, so dark-mode
-         visitors never see a flash of the light page. Must stay inline. -->
-    <script>(function(){try{var t=localStorage.getItem('arq-theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+    {% comment %}
+      The localStorage key is written into both scripts on this page -- the
+      pre-paint one below and the control at the end of <body> -- so it is
+      bound once here. Renaming it in only one place would leave the toggle
+      working while silently reintroducing the flash of the wrong theme.
+    {% endcomment %}
+    {% assign theme_key = 'arq-theme' %}
+
+    {% comment %}
+      Applies a stored theme choice before first paint, so dark-mode visitors
+      never see a flash of the light page. Must stay inline.
+    {% endcomment %}
+    <script>(function(){try{var t=localStorage.getItem('{{ theme_key }}');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
 
 {% seo %}
     {% comment %}
       Inter, for body copy -- see the Typography block in assets/css/style.scss.
       Dinky's own stylesheet already @imports Arvo from the same host for the
-      headings, so this is a second family rather than a new dependency. The
-      preconnects cover both: the CSS comes from fonts.googleapis.com and the
-      font files it names come from fonts.gstatic.com, so without the second
-      hint the file fetch pays a fresh connection. display=swap means body text
-      is readable in the fallback while the webfont is still in flight.
+      headings, so this is a second family rather than a new dependency.
+
+      Arvo is deliberately NOT hoisted into this request. It looks like it
+      should be -- an @import inside a stylesheet is only discovered after that
+      stylesheet parses, and in the request waterfall Arvo's CSS duly appears
+      behind style.css. But measuring when the font file itself starts, rather
+      than reading the order of the list, shows Arvo and Inter beginning within
+      a millisecond of each other on every run, locally and against the
+      deployed site alike. There is no lag to remove.
+
+      The preconnects cover both hosts: the CSS comes from
+      fonts.googleapis.com and the font files it names come from
+      fonts.gstatic.com, so without the second hint the file fetch pays a fresh
+      connection. display=swap keeps text readable in the fallback while the
+      webfont is still in flight.
     {% endcomment %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% comment %}
       The Bloch sphere from the logo, cropped away from the wordmark, which is
@@ -59,11 +79,13 @@
           <li><a href="{{ '/submit-benchmarks/' | relative_url }}">Call for problems/<wbr>benchmarks/<wbr>comments</a></li>
         </ul>
 
-        <!-- This row always has the GitHub link in it, so it is never empty.
-             Only the theme button is hidden until scripted: without JS the page
-             still follows the OS via CSS, but the button itself would be inert.
-             Its glyph is a placeholder; the script sets the real one, along
-             with the accessible name that stands in for the removed text. -->
+        {% comment %}
+          This row always has the GitHub link in it, so it is never empty.
+          Only the theme button is hidden until scripted: without JS the page
+          still follows the OS via CSS, but the button itself would be inert.
+          Its glyph is a placeholder; the script sets the real one, along with
+          the accessible name that stands in for the removed text.
+        {% endcomment %}
         <div class="sidebar-actions">
           <a class="icon-button" href="https://github.com/ARQ-COMP"
              aria-label="ARQ-COMP repositories on GitHub"
@@ -108,7 +130,7 @@
       // keeps tracking the OS live. The button only reports which theme is
       // currently in effect; the first click is what makes a choice explicit.
       (function () {
-        var KEY = 'arq-theme';
+        var KEY = '{{ theme_key }}';   // bound once in <head>
         // U+FE0E is the text variation selector: it keeps the sun a line glyph
         // on platforms that would otherwise substitute a colour emoji.
         var ICONS = { light: '☀︎', dark: '☾' };

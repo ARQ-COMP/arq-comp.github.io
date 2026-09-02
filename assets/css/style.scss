@@ -156,6 +156,16 @@ td {                                      /* 204 */
   color: var(--text);
 }
 
+/* A link in a table *header* would otherwise keep --link against the dark
+   --th-bg: 1.65:1 in the light theme, i.e. invisible. No page has one today;
+   this closes it before one appears. The underline matters here because the
+   link then shares its colour with the surrounding header text, so colour
+   alone no longer distinguishes it. */
+th a {
+  color: var(--th-fg);
+  text-decoration: underline;
+}
+
 /* ==========================================================================
    Typography
 

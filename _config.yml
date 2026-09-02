@@ -10,6 +10,9 @@ plugins:
   # build behaves the same: it lifts a page's first heading into page.title,
   # which changes what jekyll-seo-tag emits.
   - jekyll-titles-from-headings
+  # Not one of the Pages defaults, unlike the three above: without this there
+  # is no /sitemap.xml at all.
+  - jekyll-sitemap
 
 title: ARQ-COMP
 description: Competition on Automated Reasoning for Quantum
@@ -18,6 +21,17 @@ description: Competition on Automated Reasoning for Quantum
 # rather than inline in the page so that replacing the form is a one-line
 # change in one place.
 form_url: https://forms.gle/9AzNbS1FyJps6jRk6
+
+# Social preview. jekyll-seo-tag turns page.image into og:image and
+# twitter:image, and makes it absolute against the url below; without it a
+# shared link renders as a bare text card. Set through Jekyll's defaults so it
+# applies to every page, since seo-tag reads page.image and not a site-level
+# key. A page can still override it in its own front matter.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /logo/logo6-fixed-512.png
 
 # On Pages this is supplied by site.github, so canonical and og:url are already
 # correct in production. Setting it explicitly makes a local build emit the same
