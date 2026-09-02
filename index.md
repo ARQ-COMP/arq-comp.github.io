@@ -24,9 +24,26 @@ The Competition on Automated Reasoning for Quantum.
 
 ## Important Dates
 
-| Milestone | Date |
-| --- | --- |
-| [Call for problems/<wbr>benchmarks/<wbr>comments]({{ '/submit-benchmarks/' | relative_url }})  | 30 September 2026 |
+{% comment %}
+  Written out as HTML rather than as a Markdown table for one reason: kramdown
+  cannot put attributes on individual cells, and the header cells need
+  scope="col" so a screen reader can associate each date with its milestone.
+  To add a milestone, copy the <tr> block.
+{% endcomment %}
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Milestone</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="{{ '/submit-benchmarks/' | relative_url }}">Call for problems/<wbr>benchmarks/<wbr>comments</a></td>
+      <td>30 September 2026</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Communication
 

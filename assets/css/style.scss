@@ -299,6 +299,46 @@ header ul.nav li a {
 
 header ul.nav li a:focus-visible { @include sidebar-focus-ring; }
 
+/* The sidebar title. It was an <h1> until the layout demoted it -- every page
+   has its own <h1>, and a second one in the sidebar meant a screen reader's
+   heading list opened with "ARQ-COMP" twice. As a <p> it loses Dinky's
+   h1.header rules and picks up p.header instead, which would drop it to 16px,
+   so the original appearance is restated here: measured against the old
+   element, this reproduces it exactly. */
+p.header.site-title {
+  font-family: Arvo, sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.3em;
+  color: #fff;
+  margin: 0 0 10px;
+  padding-bottom: 5px;
+}
+
+/* Skip link. Off-screen until focused rather than display:none, which cannot
+   be focused at all, and rather than width/height:1px, which some screen
+   readers announce oddly. On focus it lands in the top-left corner over the
+   page, using the content palette so it reads in either theme: 9.4:1 in the
+   light one, 8.4:1 in the dark. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 10;
+}
+
+.skip-link:focus {
+  left: 8px;
+  top: 8px;
+  padding: 8px 12px;
+  background: var(--surface);
+  color: var(--link);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
 /* ==========================================================================
    Sidebar action row -- the GitHub link and the Light/Dark switch.
 

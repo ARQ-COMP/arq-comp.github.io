@@ -69,9 +69,22 @@
     {% include head-custom.html %}
   </head>
   <body>
+    {% comment %}
+      Skip link. It has to come before the sidebar in source order to be the
+      first thing a keyboard visitor reaches, and it is hidden off-screen
+      rather than with display:none, which would make it unfocusable.
+    {% endcomment %}
+    <a class="skip-link" href="#content">Skip to content</a>
+
     <div class="wrapper">
       <header>
-        <h1 class="header">{{ site.title | default: site.github.repository_name }}</h1>
+        {% comment %}
+          A <p>, not an <h1>. Every page has its own <h1>; making the sidebar
+          title a second one meant a screen reader's heading list opened with
+          "ARQ-COMP" twice and gave no clue which was the page. The site-title
+          class restores the look that Dinky's h1.header rules used to give it.
+        {% endcomment %}
+        <p class="header site-title">{{ site.title | default: site.github.repository_name }}</p>
         <p class="header">{{ site.description | default: site.github.project_tagline }}</p>
 
         {% comment %}
@@ -79,11 +92,13 @@
           lives in one place. aria-current marks the page the visitor is on --
           the sidebar otherwise gives a screen reader no way to tell.
         {% endcomment %}
-        <ul class="nav">
-          {%- for item in site.data.nav %}
-          <li><a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
-          {%- endfor %}
-        </ul>
+        <nav aria-label="Main">
+          <ul class="nav">
+            {%- for item in site.data.nav %}
+            <li><a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+            {%- endfor %}
+          </ul>
+        </nav>
 
         {% comment %}
           This row always has the GitHub link in it, so it is never empty.
@@ -107,7 +122,16 @@
         </div>
       </header>
 
-      <section>
+      {% comment %}
+        role="main" rather than a <main> element on purpose. Dinky floats
+        `section` right and fixes `header` left, so wrapping this in a
+        block-level <main> breaks the two-column layout, and renaming the
+        element would orphan every `section` rule in the theme and in the three
+        responsive blocks of assets/css/style.scss. role="main" gives assistive
+        technology the same landmark with no layout risk. The id is the skip
+        link's target.
+      {% endcomment %}
+      <section role="main" id="content">
         {{ content }}
       </section>
 
