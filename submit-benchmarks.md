@@ -39,14 +39,3 @@ if you are only considering it.
 
 The form also asks about non-standard hardware requirements, and leaves room
 for any other opinions and proposals.
-
-## Responding
-
-Responses go through a single form,
-[ARQ-COMP 2027: Request for Problems, Benchmarks, Opinions]({{ site.form_url }}),
-which asks for your name and email address and then covers the areas above.
-Every section is optional, so it is worth sending even if you can only answer
-one of them.
-
-Questions that do not fit the form are welcome on the
-[ARQ-COMP mailing list](https://groups.google.com/g/arq-comp).
