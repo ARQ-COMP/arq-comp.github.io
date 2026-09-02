@@ -50,7 +50,12 @@
       artwork: one version alone disappears against either a light or a dark
       browser chrome. `media` on an icon link is honoured by Chromium and
       Firefox; anything that ignores it falls back to the first match, so the
-      light pair is listed first.
+      light one is listed first.
+
+      There used to be a 180x180 pair declared here as well. Watching the
+      network showed browsers never asked for it -- only the 32px file is
+      fetched for the tab, and iOS takes the apple-touch-icon below -- so it
+      was two declarations and 30 KB of artwork backing a case nothing used.
 
       The ?v= is not decoration. Safari keeps favicons in a store separate from
       normal website data, so clearing history or website data does not
@@ -61,9 +66,7 @@
       end in a bare "?v=", which is harmless.
     {% endcomment %}
     <link rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)" href="{{ '/assets/icons/favicon-32-light.png?v=' | append: site.github.build_revision | relative_url }}">
-    <link rel="icon" type="image/png" sizes="180x180" media="(prefers-color-scheme: light)" href="{{ '/assets/icons/icon-180-light.png?v=' | append: site.github.build_revision | relative_url }}">
     <link rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)" href="{{ '/assets/icons/favicon-32-dark.png?v=' | append: site.github.build_revision | relative_url }}">
-    <link rel="icon" type="image/png" sizes="180x180" media="(prefers-color-scheme: dark)" href="{{ '/assets/icons/icon-180-dark.png?v=' | append: site.github.build_revision | relative_url }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/icons/apple-touch-icon.png?v=' | append: site.github.build_revision | relative_url }}">
 
     {% include head-custom.html %}
@@ -148,8 +151,15 @@
           so the attribute has to be on both. A browser that ignores the hint
           just fetches both, exactly as before.
         {% endcomment %}
-        <img src="{{ '/logo/logo6-fixed-512.png' | relative_url }}" alt="{{ site.title }} logo" width="512" height="512" loading="lazy" decoding="async" class="header-logo logo-light">
-        <img src="{{ '/logo/logo6-dark-512.png' | relative_url }}" alt="{{ site.title }} logo" width="512" height="512" loading="lazy" decoding="async" class="header-logo logo-dark">
+        {% comment %}
+          390px, not 512px. The CSS caps the logo at 195px wide, so 390 is
+          exactly what a 2x display needs and the 512 export was 34% of bytes
+          nobody could see -- it was the second largest asset on the page. The
+          512 pair stays in the repository because og:image still points at it,
+          where a larger square is the right thing to hand a social card.
+        {% endcomment %}
+        <img src="{{ '/logo/logo6-fixed-390.png' | relative_url }}" alt="{{ site.title }} logo" width="390" height="390" loading="lazy" decoding="async" class="header-logo logo-light">
+        <img src="{{ '/logo/logo6-dark-390.png' | relative_url }}" alt="{{ site.title }} logo" width="390" height="390" loading="lazy" decoding="async" class="header-logo logo-dark">
       </footer>
     </div>
     <script>

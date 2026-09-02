@@ -46,8 +46,10 @@ loads *after* the theme, so overrides win on source order alone.
 
 | File | Role |
 | --- | --- |
-| `logo6-fixed-512.png` | Light mode, used by the site |
-| `logo6-dark-512.png` | Dark mode, used by the site |
+| `logo6-fixed-390.png` | Light mode, rendered in the footer |
+| `logo6-dark-390.png` | Dark mode, rendered in the footer |
+| `logo6-fixed-512.png` | Light mode, used only as the `og:image` social card |
+| `logo6-dark-512.png` | Dark mode counterpart of the above, currently unreferenced |
 | `logo6-fixed.png`, `logo6-dark.png` | Full-resolution sources (1254px) |
 | `logo1`–`logo5`, `logo6` | Superseded drafts, excluded from the build |
 
@@ -67,8 +69,11 @@ the other.
 | File | Where it is used |
 | --- | --- |
 | `favicon-32-{light,dark}.png` | The tab strip |
-| `icon-180-{light,dark}.png` | Bookmarks and high-DPI tabs |
 | `apple-touch-icon.png` | iOS home screen; opaque, no alpha |
+
+A 180x180 pair used to sit alongside these, declared for bookmarks and
+high-DPI tabs. Watching the network showed nothing ever requested it -- the
+32px file serves the tab and iOS takes the touch icon -- so it was removed.
 
 Both sizes are derived from the 1254px masters in `logo/`, and two things about
 that derivation are easy to get wrong:
