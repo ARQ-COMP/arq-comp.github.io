@@ -24,16 +24,27 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- The Bloch sphere from the logo, cropped away from the wordmark, which
-         is unreadable at these sizes. Two variants because the mark is dark
-         artwork: it disappears against a dark browser chrome. `media` on an
-         icon link is honoured by Chromium and Firefox; anything that ignores
-         it falls back to the first match, so the light pair is listed first. -->
-    <link rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)" href="{{ '/assets/icons/favicon-32-light.png' | relative_url }}">
-    <link rel="icon" type="image/png" sizes="180x180" media="(prefers-color-scheme: light)" href="{{ '/assets/icons/icon-180-light.png' | relative_url }}">
-    <link rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)" href="{{ '/assets/icons/favicon-32-dark.png' | relative_url }}">
-    <link rel="icon" type="image/png" sizes="180x180" media="(prefers-color-scheme: dark)" href="{{ '/assets/icons/icon-180-dark.png' | relative_url }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/icons/apple-touch-icon.png' | relative_url }}">
+    {% comment %}
+      The Bloch sphere from the logo, cropped away from the wordmark, which is
+      unreadable at these sizes. Two variants because the mark is tinted
+      artwork: one version alone disappears against either a light or a dark
+      browser chrome. `media` on an icon link is honoured by Chromium and
+      Firefox; anything that ignores it falls back to the first match, so the
+      light pair is listed first.
+
+      The ?v= is not decoration. Safari keeps favicons in a store separate from
+      normal website data, so clearing history or website data does not
+      necessarily evict them and a changed icon can stay stale indefinitely.
+      That cache is keyed by URL, so pinning the build revision -- the same
+      thing the stylesheet above does -- is what makes an icon change actually
+      reach people. Locally site.github.build_revision is empty and the URLs
+      end in a bare "?v=", which is harmless.
+    {% endcomment %}
+    <link rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)" href="{{ '/assets/icons/favicon-32-light.png?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="icon" type="image/png" sizes="180x180" media="(prefers-color-scheme: light)" href="{{ '/assets/icons/icon-180-light.png?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)" href="{{ '/assets/icons/favicon-32-dark.png?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="icon" type="image/png" sizes="180x180" media="(prefers-color-scheme: dark)" href="{{ '/assets/icons/icon-180-dark.png?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/icons/apple-touch-icon.png?v=' | append: site.github.build_revision | relative_url }}">
 
     {% include head-custom.html %}
   </head>
