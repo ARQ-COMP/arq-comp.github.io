@@ -183,6 +183,47 @@ th a {
 }
 
 /* ==========================================================================
+   Inter, self-hosted
+
+   Google served this as two subset files totalling 130 KB: 47 KB of latin,
+   plus 83 KB of "latin-ext" that the page pulled in for a single character --
+   the r-caron in Ondrej Lengal's name. That file also carries IPA extensions,
+   Latin Extended Additional and more that this site will never render.
+
+   Subsetting the upstream variable font to latin plus Latin Extended-A and
+   punctuation, with the weight axis clamped to the 400-700 the site actually
+   uses and the optical-size axis pinned, gives one 31 KB file: 99 KB less, and
+   one request instead of two stylesheets and two fonts. Latin Extended-A is
+   deliberately wider than today's content needs, since it covers Central and
+   Western European names generally rather than only the two on the homepage.
+
+   Regenerating it, if the range or the weights ever change:
+
+     fonttools varLib.instancer Inter[opsz,wght].ttf wght=400:700 opsz=14 \
+       -o Inter-clamped.ttf
+     fonttools subset Inter-clamped.ttf --flavor=woff2 \
+       --output-file=assets/fonts/inter-latin-var.woff2 \
+       --layout-features=kern,liga,clig,calt --no-hinting \
+       --unicodes=U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,\
+     U+02DC,U+0100-017F,U+2000-206F,U+20AC,U+2122,U+2212,U+2215,U+FEFF,U+FFFD
+
+   The font is redistributed here, so the SIL Open Font License it ships under
+   obliges us to carry its text: assets/fonts/Inter-OFL.txt, also referenced
+   from NOTICE.
+   ========================================================================== */
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  /* A range, not a value: this is the variable font, so the browser
+     interpolates 400 through 700 from the one file rather than asking for a
+     second weight. */
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('{{ "/assets/fonts/inter-latin-var.woff2" | relative_url }}') format('woff2');
+}
+
+/* ==========================================================================
    Typography
 
    Dinky sets body copy to 14px "Helvetica Neue"/Arial, every link to

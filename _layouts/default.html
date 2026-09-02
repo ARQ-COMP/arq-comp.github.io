@@ -20,27 +20,20 @@
 
 {% seo %}
     {% comment %}
-      Inter, for body copy -- see the Typography block in assets/css/style.scss.
-      Dinky's own stylesheet already @imports Arvo from the same host for the
-      headings, so this is a second family rather than a new dependency.
+      Inter is no longer requested from Google -- it is self-hosted and
+      subsetted, declared by @font-face at the top of
+      assets/css/style.scss. See that block for the numbers and for how to
+      regenerate the file.
 
-      Arvo is deliberately NOT hoisted into this request. It looks like it
-      should be -- an @import inside a stylesheet is only discovered after that
-      stylesheet parses, and in the request waterfall Arvo's CSS duly appears
-      behind style.css. But measuring when the font file itself starts, rather
-      than reading the order of the list, shows Arvo and Inter beginning within
-      a millisecond of each other on every run, locally and against the
-      deployed site alike. There is no lag to remove.
-
-      The preconnects cover both hosts: the CSS comes from
-      fonts.googleapis.com and the font files it names come from
-      fonts.gstatic.com, so without the second hint the file fetch pays a fresh
-      connection. display=swap keeps text readable in the fallback while the
-      webfont is still in flight.
+      The preconnects stay for Arvo, which Dinky's own stylesheet @imports from
+      Google for the headings: the CSS comes from fonts.googleapis.com and the
+      file it names from fonts.gstatic.com, so without the second hint the file
+      fetch pays a fresh connection. Removing that dependency too would mean
+      not importing Dinky's stylesheet at all, which is a different decision
+      from this one.
     {% endcomment %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
 

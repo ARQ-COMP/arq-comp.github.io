@@ -20,6 +20,9 @@ competition rather than reusable source. All rights in them are reserved:
   logo/            the ARQ-COMP logo, in its working and web-export sizes
   assets/icons/    the favicons and touch icon, cropped from that logo
 
+Nor does it apply to the font bundled in assets/fonts/, which carries its own
+licence -- see below.
+
 The GitHub mark inlined as an SVG path in _layouts/default.html is GitHub's
 trademark. It is used there to label a link to the competition's own GitHub
 organisation, and its use is governed by GitHub's logo guidelines rather than
@@ -40,9 +43,16 @@ derivative rather than a mere consumer of the theme: _layouts/default.html
 began as a copy of Dinky's own layout, and assets/css/style.scss imports
 Dinky's stylesheet and restates a number of its rules on top of it.
 
-Two typefaces are requested from Google Fonts rather than bundled here, so
-their files are not redistributed by this repository. Both are under the SIL
-Open Font License 1.1:
+Two typefaces, under the SIL Open Font License 1.1, handled differently:
 
-  Arvo   by Anton Koovit       -- headings; requested by Dinky's own stylesheet
-  Inter  by Rasmus Andersson   -- body copy; requested in _layouts/default.html
+  Inter, by Rasmus Andersson -- body copy. A subset of it IS redistributed by
+  this repository, as assets/fonts/inter-latin-var.woff2. The OFL requires that
+  the licence travel with the font, so its text sits beside the file as
+  assets/fonts/Inter-OFL.txt, carrying the Inter Project Authors' copyright.
+  The subset is a derivative of the upstream variable font: the weight axis is
+  clamped to 400-700, the optical-size axis is pinned, and the character set is
+  cut to latin plus Latin Extended-A. assets/css/style.scss records the exact
+  commands, so the derivation is reproducible.
+
+  Arvo, by Anton Koovit -- headings. Requested from Google Fonts by Dinky's own
+  stylesheet, not redistributed here, so no licence file is required for it.

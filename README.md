@@ -14,6 +14,7 @@ homepage is [`index.md`](index.md).
 | `submit-benchmarks.md` | The Call for problems/benchmarks/comments page (`permalink: /submit-benchmarks/`) |
 | `404.md` | Served by GitHub Pages for any missing path (`permalink: /404.html`) |
 | `assets/icons/` | Favicons — the Bloch sphere cropped out of the logo, light and dark |
+| `assets/fonts/` | Inter, self-hosted and subsetted, with the OFL text the licence requires |
 | `_data/nav.yml` | The sidebar navigation — the single source for it, used by the layout and `404.md` |
 | `_config.yml` | Site config, and the `exclude:` list that keeps drafts off the live site |
 | `_layouts/default.html` | Page shell — sidebar, nav, theme switch. Forked from the Dinky theme's own layout |
@@ -99,6 +100,28 @@ The dark variants also get their ink lifted 25% toward white, on top of the HLS
 remap the footer logo uses. That remap was tuned against the page ground
 (`#11141a`), and a browser's dark tab strip is much lighter — Chrome's is about
 `#35363a` — so the footer tone alone lands under 4.5:1 there.
+
+## Fonts
+
+Body copy is Inter, **self-hosted** from `assets/fonts/inter-latin-var.woff2`.
+Headings are Arvo, which Dinky's own stylesheet pulls from Google Fonts.
+
+Inter used to come from Google too, as two subset files totalling 130 KB — 47 KB
+of `latin`, plus 83 KB of `latin-ext` that the page fetched for a single
+character, the r-caron in one organizer's name. Subsetting the upstream variable
+font to latin plus Latin Extended-A, with the weight axis clamped to the 400–700
+the site uses, gives **one 31 KB file**. The `@font-face` block at the top of
+`assets/css/style.scss` carries the exact `fonttools` commands to regenerate it.
+
+Two consequences worth knowing:
+
+- The bundled file makes this repository a redistributor of Inter, so the OFL
+  text must travel with it — hence `assets/fonts/Inter-OFL.txt`. Do not delete
+  it, and see [`NOTICE`](NOTICE).
+- Latin Extended-A is deliberately wider than the current content needs. It
+  covers Central and Western European names in general, so a new organizer or a
+  cited author does not silently fall back to a system font. Content outside
+  that range — Greek, Cyrillic, Vietnamese — would.
 
 ## Colour theme
 
