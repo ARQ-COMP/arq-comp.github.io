@@ -14,6 +14,7 @@ homepage is [`index.md`](index.md).
 | `submit-benchmarks.md` | The Call for problems/benchmarks/comments page (`permalink: /submit-benchmarks/`) |
 | `404.md` | Served by GitHub Pages for any missing path (`permalink: /404.html`) |
 | `assets/icons/` | Favicons — the Bloch sphere cropped out of the logo, light and dark |
+| `_data/nav.yml` | The sidebar navigation — the single source for it, used by the layout and `404.md` |
 | `_config.yml` | Site config, and the `exclude:` list that keeps drafts off the live site |
 | `_layouts/default.html` | Page shell — sidebar, nav, theme switch. Forked from the Dinky theme's own layout |
 | `assets/css/style.scss` | All styling: theme tokens, dark mode, and the overrides on top of Dinky |
@@ -36,8 +37,10 @@ loads *after* the theme, so overrides win on source order alone.
    permalink: /your-page/
    ---
    ```
-2. Add a link to the sidebar list in `_layouts/default.html` — the nav is
-   currently hardcoded there.
+2. Add an entry to [`_data/nav.yml`](_data/nav.yml). That is the only place the
+   navigation lives: the sidebar in `_layouts/default.html` and the recovery
+   links on `404.md` are both generated from it, and the entry whose `url`
+   matches the current page gets `aria-current="page"` automatically.
 
 ## Logos
 

@@ -1,0 +1,28 @@
+# The sidebar navigation, in the order it is shown.
+#
+# This is the single source for it. The layout builds the sidebar from this
+# list, and 404.md builds its "try one of these" links from the same list, so
+# adding a page here is enough -- previously the nav lived in the layout and
+# was written out a second time by hand in 404.md.
+#
+# url must match the page's permalink exactly, including the trailing slash.
+# That string is compared against page.url to decide which item gets
+# aria-current="page", so a mismatch does not break the link, it just silently
+# stops marking the current page.
+#
+# label is emitted as HTML, not escaped, so it can carry <wbr> break points.
+# Those are load-bearing on the long label below: browsers do not break lines
+# after "/", and without them the nav link overflows the sidebar and the
+# homepage table pushes a phone into horizontal scroll.
+#
+# One side effect to know about: Chromium computes the link's accessible name
+# with a space at each <wbr>, so the label reads out as "Call for problems/
+# benchmarks/ comments" while the visible text has no spaces. It is still
+# perfectly intelligible, so it is left alone rather than papered over with an
+# aria-label that would then be a second copy of the text to keep in step.
+
+- label: Home
+  url: /
+
+- label: Call for problems/<wbr>benchmarks/<wbr>comments
+  url: /submit-benchmarks/
