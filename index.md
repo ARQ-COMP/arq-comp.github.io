@@ -9,8 +9,10 @@ layout: default
 # page.title and reintroduce the doubling.
 title: ARQ-COMP
 #
-# Every "To be announced" below is a real gap, not filler -- replace them as
-# each is settled. Add news items to the top of the News list, newest first.
+# Important Dates lists only milestones that have actually been settled, so a
+# reader can trust every row. Add the later ones (submission deadlines, results)
+# as each date is fixed rather than carrying them as "To be announced".
+# Add news items to the top of the News list, newest first.
 ---
 
 # ARQ-COMP 2027
@@ -24,10 +26,7 @@ are decided.
 
 | Milestone | Date |
 | --- | --- |
-| Call for benchmarks | To be announced |
-| Benchmark submission deadline | To be announced |
-| Tool submission deadline | To be announced |
-| Results announced | To be announced |
+| Call for benchmarks | September 30, 2026 |
 
 See [Submit Benchmarks]({{ '/submit-benchmarks/' | relative_url }}) for what a
 submission should look like.
