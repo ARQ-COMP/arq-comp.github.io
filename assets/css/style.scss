@@ -157,6 +157,46 @@ td {                                      /* 204 */
 }
 
 /* ==========================================================================
+   Typography
+
+   Dinky sets body copy to 14px "Helvetica Neue"/Arial, every link to
+   font-weight: 200, and -webkit-font-smoothing: antialiased. That reads thin in
+   both themes, and the smoothing hint makes it thinner still in Safari and on
+   macOS, where it turns off subpixel antialiasing -- worst for light text on
+   the dark ground, where strokes already look lighter than they measure.
+
+   Inter is fetched in the layout's <head>. It is a screen typeface with a
+   sturdy 400, so the body holds up at 16px without reaching for a heavier
+   weight. The stack keeps the platform UI fonts behind it, so a visitor who
+   never gets the webfont still lands on something current rather than on
+   Helvetica.
+   ========================================================================== */
+
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;               /* Dinky: 1.8em, set on 14px */
+  -webkit-font-smoothing: auto;   /* Dinky: antialiased */
+}
+
+/* The size is scoped to screen on purpose. Dinky drops the body to 12pt when
+   printing (352), and an unconditional font-size here would sit later in source
+   order and quietly win there instead -- the same trap the two-column widths
+   are scoped against. Nothing looks different today, because 12pt resolves to
+   exactly 16px; the scope is what keeps that true if either number moves. */
+@media screen {
+  body { font-size: 16px; }
+}
+
+/* Dinky's `a { font-weight: 200 }` (79) makes every link thinner than the
+   sentence around it. Links should not be the hardest thing on the page to
+   read. */
+a { font-weight: 400; }
+
+/* Keeps code level with the body instead of sitting 2px below it (166). */
+code, pre { font-size: 15px; }
+
+/* ==========================================================================
    Site layout
    ========================================================================== */
 

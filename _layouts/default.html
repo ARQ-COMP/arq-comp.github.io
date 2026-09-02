@@ -8,6 +8,19 @@
     <script>(function(){try{var t=localStorage.getItem('arq-theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
 
 {% seo %}
+    {% comment %}
+      Inter, for body copy -- see the Typography block in assets/css/style.scss.
+      Dinky's own stylesheet already @imports Arvo from the same host for the
+      headings, so this is a second family rather than a new dependency. The
+      preconnects cover both: the CSS comes from fonts.googleapis.com and the
+      font files it names come from fonts.gstatic.com, so without the second
+      hint the file fetch pays a fresh connection. display=swap means body text
+      is readable in the fallback while the webfont is still in flight.
+    {% endcomment %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
