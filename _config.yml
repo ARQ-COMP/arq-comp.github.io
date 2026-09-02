@@ -14,6 +14,11 @@ plugins:
 title: ARQ-COMP
 description: Competition on Automated Reasoning for Quantum
 
+# The Google Form behind the call for problems/benchmarks/comments. It is
+# referenced more than once on that page, so it lives here rather than being
+# pasted in twice and drifting apart later.
+form_url: https://forms.gle/9AzNbS1FyJps6jRk6
+
 # On Pages this is supplied by site.github, so canonical and og:url are already
 # correct in production. Setting it explicitly makes a local build emit the same
 # absolute URLs instead of bare "/".
