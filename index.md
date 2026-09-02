@@ -29,7 +29,7 @@ are decided.
 
 | Milestone | Date |
 | --- | --- |
-| [Call for problems, benchmarks, comments]({{ '/submit-benchmarks/' | relative_url }})  | 30 September 2026 |
+| [Call for problems/<wbr>benchmarks/<wbr>comments]({{ '/submit-benchmarks/' | relative_url }})  | 30 September 2026 |
 
 ## Communication
 
