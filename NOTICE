@@ -1,0 +1,48 @@
+ARQ-COMP -- Competition on Automated Reasoning for Quantum
+https://arq-comp.github.io/
+
+This file records what the MIT licence in LICENSE covers, what it does not, and
+what this site is built on. LICENSE is kept to the licence text alone so that
+it is recognised for what it is; the scope below is part of the terms on which
+this repository is published.
+
+
+-------------------------------------------------------------------------------
+Scope of the MIT licence
+-------------------------------------------------------------------------------
+
+LICENSE covers the source of the site: the Jekyll layout, the stylesheet, the
+configuration, and the prose of the pages.
+
+It does not grant any rights in the following, which are the identity of the
+competition rather than reusable source. All rights in them are reserved:
+
+  logo/            the ARQ-COMP logo, in its working and web-export sizes
+  assets/icons/    the favicons and touch icon, cropped from that logo
+
+The GitHub mark inlined as an SVG path in _layouts/default.html is GitHub's
+trademark. It is used there to label a link to the competition's own GitHub
+organisation, and its use is governed by GitHub's logo guidelines rather than
+by anything in this repository.
+
+
+-------------------------------------------------------------------------------
+Attribution
+-------------------------------------------------------------------------------
+
+This site is built on the Dinky theme for GitHub Pages:
+
+  https://github.com/pages-themes/dinky
+
+Dinky is dedicated to the public domain under CC0 1.0 Universal, which asks for
+no attribution. It is credited here anyway, because the site is a genuine
+derivative rather than a mere consumer of the theme: _layouts/default.html
+began as a copy of Dinky's own layout, and assets/css/style.scss imports
+Dinky's stylesheet and restates a number of its rules on top of it.
+
+Two typefaces are requested from Google Fonts rather than bundled here, so
+their files are not redistributed by this repository. Both are under the SIL
+Open Font License 1.1:
+
+  Arvo   by Anton Koovit       -- headings; requested by Dinky's own stylesheet
+  Inter  by Rasmus Andersson   -- body copy; requested in _layouts/default.html
