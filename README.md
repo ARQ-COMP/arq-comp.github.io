@@ -19,6 +19,7 @@ homepage is [`index.md`](index.md).
 | `assets/css/style.scss` | All styling: theme tokens, dark mode, and the overrides on top of Dinky |
 | `logo/` | Logo artwork — see below |
 | `Gemfile`, `Gemfile.lock` | Local previews only; GitHub Pages ignores both |
+| `LICENSE` | MIT for the source, with the logo carved out and the theme attributed |
 
 The theme is [Dinky](https://github.com/pages-themes/dinky), pinned via
 `remote_theme: pages-themes/dinky@v0.2.0`. Everything in `assets/css/style.scss`
@@ -203,3 +204,15 @@ publish, so breakage looks like the site going stale rather than like an error
 — though GitHub does email whoever pushed. Running `bundle exec jekyll build`
 once beforehand avoids that, and is worth it if you have touched the layout,
 the stylesheet or a page's front matter.
+
+## Licence
+
+[`LICENSE`](LICENSE) puts the source of the site under MIT, with two
+exceptions spelled out there: the logo and the favicons cropped from it are the
+competition's identity and are not licensed for reuse, and the GitHub mark in
+the sidebar is GitHub's trademark rather than ours to license.
+
+The same file attributes the [Dinky theme](https://github.com/pages-themes/dinky).
+Dinky is CC0 1.0 and asks for nothing, but this site is a real derivative of it
+-- the layout started as a copy of Dinky's, and the stylesheet imports Dinky's
+and restates its rules -- so the attribution is recorded deliberately.

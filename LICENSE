@@ -1,0 +1,59 @@
+MIT License
+
+Copyright (c) 2026 Johannes K. Fichte and Ondřej Lengál
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+-------------------------------------------------------------------------------
+What the licence above does not cover
+-------------------------------------------------------------------------------
+
+The ARQ-COMP logo, and the favicons cropped from it, are the identity of the
+competition rather than reusable source. They are not covered by the licence
+above, and all rights to them are reserved:
+
+  logo/
+  assets/icons/
+
+The GitHub mark inlined as an SVG path in _layouts/default.html is GitHub's
+trademark, used to label a link to the project's own GitHub organisation. Its
+use is governed by GitHub's logo guidelines, not by this licence.
+
+
+-------------------------------------------------------------------------------
+Attribution
+-------------------------------------------------------------------------------
+
+This site is built on the Dinky theme for GitHub Pages:
+
+  https://github.com/pages-themes/dinky
+
+Dinky is dedicated to the public domain under CC0 1.0 Universal, which asks for
+no attribution. It is recorded here anyway, because the site is a genuine
+derivative rather than a mere consumer of the theme: _layouts/default.html
+began as a copy of Dinky's own layout, and assets/css/style.scss imports
+Dinky's stylesheet and restates a number of its rules on top.
+
+Two typefaces are loaded from Google Fonts rather than bundled in this
+repository, so their files are not redistributed here. Both are under the SIL
+Open Font License 1.1:
+
+  Arvo, by Anton Koovit    -- headings, pulled in by Dinky's own stylesheet
+  Inter, by Rasmus Andersson -- body copy, requested in _layouts/default.html
