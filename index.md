@@ -12,6 +12,9 @@ title: ARQ-COMP
 # Important Dates lists only milestones that have actually been settled, so a
 # reader can trust every row. Add the later ones (submission deadlines, results)
 # as each date is fixed rather than carrying them as "To be announced".
+#
+# Dates are written day-first and unabbreviated -- "30 September 2026" -- in
+# both the table and the News list, so the two read the same.
 # Add news items to the top of the News list, newest first.
 ---
 
@@ -26,7 +29,7 @@ are decided.
 
 | Milestone | Date |
 | --- | --- |
-| [Call for problems, benchmarks, comments]({{ '/submit-benchmarks/' | relative_url }})  | September 30, 2026 |
+| [Call for problems, benchmarks, comments]({{ '/submit-benchmarks/' | relative_url }})  | 30 September 2026 |
 
 ## Communication
 
