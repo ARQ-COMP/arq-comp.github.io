@@ -43,16 +43,25 @@ derivative rather than a mere consumer of the theme: _layouts/default.html
 began as a copy of Dinky's own layout, and assets/css/style.scss imports
 Dinky's stylesheet and restates a number of its rules on top of it.
 
-Two typefaces, under the SIL Open Font License 1.1, handled differently:
+Both typefaces are under the SIL Open Font License 1.1, and both are
+redistributed by this repository as subsets, so the OFL's requirement that the
+licence travel with the font applies to each:
 
-  Inter, by Rasmus Andersson -- body copy. A subset of it IS redistributed by
-  this repository, as assets/fonts/inter-latin-var.woff2. The OFL requires that
-  the licence travel with the font, so its text sits beside the file as
-  assets/fonts/Inter-OFL.txt, carrying the Inter Project Authors' copyright.
-  The subset is a derivative of the upstream variable font: the weight axis is
-  clamped to 400-700, the optical-size axis is pinned, and the character set is
-  cut to latin plus Latin Extended-A. assets/css/style.scss records the exact
-  commands, so the derivation is reproducible.
+  Inter, by Rasmus Andersson -- body copy.
+    assets/fonts/inter-latin-var.woff2, licence at assets/fonts/Inter-OFL.txt
 
-  Arvo, by Anton Koovit -- headings. Requested from Google Fonts by Dinky's own
-  stylesheet, not redistributed here, so no licence file is required for it.
+  Arvo, by Anton Koovit -- headings.
+    assets/fonts/arvo-400.woff2 and arvo-700.woff2,
+    licence at assets/fonts/Arvo-OFL.txt
+
+Both files are derivatives of the upstream fonts rather than copies. Inter's
+weight axis is clamped to 400-700 and its optical-size axis pinned; both are cut
+to a character set of latin plus Latin Extended-A and punctuation. The exact
+commands are recorded in assets/css/style.scss, so each derivation is
+reproducible from the upstream release.
+
+Dinky's own stylesheet still @imports Arvo's stylesheet from Google Fonts, which
+is a 0.8 KB request this repository cannot remove without giving up importing
+Dinky at all. It returns font-face declarations only; the declarations in
+assets/css/style.scss come later and win, so no font file is fetched from
+Google.

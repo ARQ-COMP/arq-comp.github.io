@@ -224,6 +224,49 @@ th a {
 }
 
 /* ==========================================================================
+   Arvo, self-hosted
+
+   Arvo is the heading face, and Dinky asks Google for it with an @import at
+   the very top of its own stylesheet. That @import cannot be removed without
+   giving up importing Dinky at all, so it still fetches 0.8 KB of CSS -- but
+   the CSS it returns only *declares* faces, and these declarations come later
+   in the compiled file. Later wins for the same family, weight and range, so
+   the browser resolves Arvo to the files below and never asks
+   fonts.gstatic.com for the font itself. Verified by watching the network.
+
+   Subsetted the same way as Inter, to the same ranges. Note that Arvo simply
+   does not have most of Latin Extended-A -- no r-caron, e-caron, u-ring and so
+   on -- so a heading containing Czech falls back to a system serif for those
+   letters. That was equally true of the copy Google served; it is a property
+   of the typeface, not of the subsetting.
+
+   Two faces, because Dinky uses 400 for h1-h3 and th, and 700 for h4-h6. No
+   page has an h4 yet, so only the 400 is actually downloaded today. The
+   sidebar title asks for 300, which has no face in either file and is
+   synthesised -- again, exactly as before.
+
+   Italic is deliberately absent. Dinky's Google request includes it, nothing
+   on the site uses it, and if something ever does the browser will slant the
+   roman rather than fetch anything.
+   ========================================================================== */
+
+@font-face {
+  font-family: Arvo;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('{{ "/assets/fonts/arvo-400.woff2" | relative_url }}') format('woff2');
+}
+
+@font-face {
+  font-family: Arvo;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('{{ "/assets/fonts/arvo-700.woff2" | relative_url }}') format('woff2');
+}
+
+/* ==========================================================================
    Typography
 
    Dinky sets body copy to 14px "Helvetica Neue"/Arial, every link to

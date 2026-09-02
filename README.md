@@ -103,8 +103,8 @@ remap the footer logo uses. That remap was tuned against the page ground
 
 ## Fonts
 
-Body copy is Inter, **self-hosted** from `assets/fonts/inter-latin-var.woff2`.
-Headings are Arvo, which Dinky's own stylesheet pulls from Google Fonts.
+Both faces are **self-hosted and subsetted**: Inter for body copy, Arvo for
+headings, all in `assets/fonts/`.
 
 Inter used to come from Google too, as two subset files totalling 130 KB — 47 KB
 of `latin`, plus 83 KB of `latin-ext` that the page fetched for a single
@@ -122,6 +122,18 @@ Two consequences worth knowing:
   covers Central and Western European names in general, so a new organizer or a
   cited author does not silently fall back to a system font. Content outside
   that range — Greek, Cyrillic, Vietnamese — would.
+
+Arvo got the same treatment, at 10 KB per face against the 16.9 KB Google served
+for one. Two caveats specific to it:
+
+- **Arvo has almost no Latin Extended-A.** No r-caron, e-caron or u-ring, so a
+  *heading* containing Czech falls back to a system serif for those letters.
+  That was equally true of Google's copy — it is the typeface, not the subset.
+- Dinky `@import`s Arvo's stylesheet from Google at the top of its own CSS, and
+  that cannot be removed without giving up importing Dinky. It still costs a
+  0.8 KB request, but it only *declares* faces, and the declarations in
+  `style.scss` come later and win — so nothing is fetched from
+  `fonts.gstatic.com`. Confirmed by watching the network: zero requests to it.
 
 ## Colour theme
 
