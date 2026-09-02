@@ -22,9 +22,6 @@ title: ARQ-COMP
 
 The Competition on Automated Reasoning for Quantum.
 
-🚧 This page is a work in progress — the details below will be filled in as they
-are decided.
-
 ## Important Dates
 
 | Milestone | Date |
