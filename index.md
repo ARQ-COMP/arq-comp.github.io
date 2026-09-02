@@ -36,7 +36,7 @@ to follow the competition.
 
 ## News
 
-Nothing to report yet.
+- **1 September 2026** — Set up this web site.
 
 ## Organizers
 
