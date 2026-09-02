@@ -39,7 +39,7 @@ to follow the competition.
 
 ## News
 
-- **1 September 2026** — Set up this web site.
+- **1 September 2026** — Web site running.
 
 ## Organizers
 
