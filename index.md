@@ -26,10 +26,7 @@ are decided.
 
 | Milestone | Date |
 | --- | --- |
-| Call for benchmarks | September 30, 2026 |
-
-See [Submit Benchmarks]({{ '/submit-benchmarks/' | relative_url }}) for what a
-submission should look like.
+| [Call for problems, benchmarks, comments]({{ '/submit-benchmarks/' | relative_url }})  | September 30, 2026 |
 
 ## Communication
 
