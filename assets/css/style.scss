@@ -66,6 +66,22 @@
   --sidebar-rule:   rgba(255, 255, 255, 0.22);
 }
 
+/* Focus ring for the controls in the sidebar -- the nav links and the two icon
+   buttons. It has to be set explicitly: Chromium's own ring is near-black
+   (#101010 under the light theme), which lands on the navy sidebar at 1.24:1,
+   below the 3:1 that WCAG 2.4.11 asks for and in practice invisible. A
+   keyboard visitor could not see where they were.
+
+   White rather than a token, because both sidebar grounds are dark -- 15.4:1
+   on the light theme's navy and 16.9:1 on the dark theme's neutral. Note that
+   --sidebar-rule is NOT the thing to reach for here: it is #fff in the light
+   theme but rgba(255,255,255,.22) in the dark one, which is a hairline
+   separator, far too faint to be a focus indicator. */
+@mixin sidebar-focus-ring {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
 /* The logo is dark navy-to-purple artwork on transparency, and it sits in the
    footer -- on the page ground, not on the sidebar -- so on a near-black page
    the navy end would disappear. logo6-dark.png is the same mark with its
@@ -281,6 +297,8 @@ header ul.nav li a {
   font-weight: bold;
 }
 
+header ul.nav li a:focus-visible { @include sidebar-focus-ring; }
+
 /* ==========================================================================
    Sidebar action row -- the GitHub link and the Light/Dark switch.
 
@@ -338,10 +356,7 @@ a.icon-button:hover {
   background: rgba(255, 255, 255, 0.16);
 }
 
-.icon-button:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
-}
+.icon-button:focus-visible { @include sidebar-focus-ring; }
 
 /* The theme's `img`/svg rules add borders and margins to media in content;
    these glyphs are chrome, not content. */
