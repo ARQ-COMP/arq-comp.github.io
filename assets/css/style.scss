@@ -193,6 +193,13 @@ body {
    read. */
 a { font-weight: 400; }
 
+/* ...but that rule also flattens a link wrapped in <strong>, which is what
+   Markdown emphasis around a link produces (`**[text](url)**`). Setting the
+   weight on the `a` beats inheriting 700 from the `strong`, so an emphasised
+   link silently loses its emphasis. Put it back. */
+strong a,
+a strong { font-weight: 700; }
+
 /* Keeps code level with the body instead of sitting 2px below it (166). */
 code, pre { font-size: 15px; }
 
