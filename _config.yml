@@ -31,39 +31,23 @@ defaults:
   - scope:
       path: ""
     values:
-      image: /logo/logo6-fixed-512.png
+      image: /assets/img/logo-light-512.png
 
 # On Pages this is supplied by site.github, so canonical and og:url are already
 # correct in production. Setting it explicitly makes a local build emit the same
 # absolute URLs instead of bare "/".
 url: https://arq-comp.github.io
 
-# Superseded drafts of the logo. They are kept in the repository for
-# reference, but without this they are copied into the build and served
-# publicly -- about 5.5 MB of abandoned artwork at /logo/.
-# Jekyll concatenates this with its own defaults rather than replacing them,
-# so Gemfile and friends stay excluded.
+# This list used to carry nine logo files, and it defaulted to publishing: a
+# new draft dropped in the wrong directory would have gone live until somebody
+# noticed and added a line. Artwork is now split by directory instead --
+# assets/img/ is published, _design/ never is, because Jekyll ignores
+# directories whose names begin with an underscore -- so there is nothing left
+# to remember. Only README.md still needs naming.
+#
+# Jekyll concatenates this with its own defaults rather than replacing them, so
+# Gemfile and friends stay excluded.
 exclude:
   # Repository documentation, not site content. Without this, GitHub Pages'
   # jekyll-optional-front-matter would publish it at /README.html.
   - README.md
-
-  - logo/logo1.png
-  - logo/logo2.png
-  - logo/logo3.png
-  - logo/logo4.png
-  - logo/logo5.png
-  - logo/logo6.png
-
-  # The 1254px masters. The site renders the smaller exports, so these were
-  # 664 KB of the published site that no page referenced. Note this retires two
-  # URLs that had been live since August: /logo/logo6-fixed.png and
-  # /logo/logo6-dark.png.
-  - logo/logo6-fixed.png
-  - logo/logo6-dark.png
-
-  # The dark 512px export. The footer renders the 390px pair and og:image points
-  # at the light 512, so nothing references this one; it is kept in the
-  # repository as the counterpart of the image the social card uses, in case
-  # that ever needs a dark variant.
-  - logo/logo6-dark-512.png

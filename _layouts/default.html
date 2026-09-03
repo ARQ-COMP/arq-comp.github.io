@@ -147,12 +147,12 @@
         {% comment %}
           390px, not 512px. The CSS caps the logo at 195px wide, so 390 is
           exactly what a 2x display needs and the 512 export was 34% of bytes
-          nobody could see -- it was the second largest asset on the page. The
-          512 pair stays in the repository because og:image still points at it,
-          where a larger square is the right thing to hand a social card.
+          nobody could see -- it was the second largest asset on the page.
+          assets/img/logo-light-512.png stays for og:image, where a larger
+          square is the right thing to hand a social card.
         {% endcomment %}
-        <img src="{{ '/logo/logo6-fixed-390.png' | relative_url }}" alt="{{ site.title }} logo" width="390" height="390" loading="lazy" decoding="async" class="header-logo logo-light">
-        <img src="{{ '/logo/logo6-dark-390.png' | relative_url }}" alt="{{ site.title }} logo" width="390" height="390" loading="lazy" decoding="async" class="header-logo logo-dark">
+        <img src="{{ '/assets/img/logo-light-390.png' | relative_url }}" alt="{{ site.title }} logo" width="390" height="390" loading="lazy" decoding="async" class="header-logo logo-light">
+        <img src="{{ '/assets/img/logo-dark-390.png' | relative_url }}" alt="{{ site.title }} logo" width="390" height="390" loading="lazy" decoding="async" class="header-logo logo-dark">
       </footer>
     </div>
     <script>

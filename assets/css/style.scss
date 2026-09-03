@@ -1,7 +1,16 @@
 ---
 ---
 
-@import "{{ site.theme }}";
+{% comment %}
+  Imported by name rather than as {{ site.theme }}, which resolved to the
+  theme's dinky.scss placeholder. That file's own `@import
+  "jekyll-theme-dinky"` resolves next to itself, inside the theme, so the
+  vendored copy in this repository's _sass never got a look in. Importing it
+  directly from here makes Sass use the load path instead -- and the site's
+  _sass comes before the theme's, so _sass/jekyll-theme-dinky.scss wins. That
+  copy is the upstream file minus its Google Fonts @import; see its header.
+{% endcomment %}
+@import "jekyll-theme-dinky";
 
 /* ==========================================================================
    Theme tokens
@@ -343,6 +352,20 @@ header {
     width: 240px;
     padding-left: 30px;
   }
+}
+
+/* At desktop widths Dinky fixes both the sidebar and the footer, the sidebar
+   anchored to the top and the footer to the bottom. In a short window they
+   converge: the footer's top sits at roughly (viewport height - 205px), so
+   below about 536px it climbs over the action buttons, and below 480px over
+   the nav links as well. Measured: fine at 560px, overlapping the buttons at
+   520px, overlapping the links at 480px.
+
+   The logo is the least important thing in the sidebar, so it gives way. This
+   only applies where the fixed layout does -- at 960px and below Dinky puts
+   both back in normal flow and they cannot collide. */
+@media screen and (min-width: 961px) and (max-height: 560px) {
+  footer { display: none; }
 }
 
 .header-logo {

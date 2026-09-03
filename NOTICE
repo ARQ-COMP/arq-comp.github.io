@@ -17,8 +17,9 @@ configuration, and the prose of the pages.
 It does not grant any rights in the following, which are the identity of the
 competition rather than reusable source. All rights in them are reserved:
 
-  logo/            the ARQ-COMP logo, in its working and web-export sizes
+  assets/img/      the ARQ-COMP logo, in the sizes the site renders
   assets/icons/    the favicons and touch icon, cropped from that logo
+  _design/         the logo masters and the superseded drafts, never published
 
 Nor does it apply to the font bundled in assets/fonts/, which carries its own
 licence -- see below.

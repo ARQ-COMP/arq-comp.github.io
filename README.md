@@ -19,7 +19,9 @@ homepage is [`index.md`](index.md).
 | `_config.yml` | Site config, and the `exclude:` list that keeps drafts off the live site |
 | `_layouts/default.html` | Page shell — sidebar, nav, theme switch. Forked from the Dinky theme's own layout |
 | `assets/css/style.scss` | All styling: theme tokens, dark mode, and the overrides on top of Dinky |
-| `logo/` | Logo artwork — see below |
+| `_sass/jekyll-theme-dinky.scss` | Dinky's own stylesheet, vendored to drop one line — see below |
+| `assets/img/` | Logo artwork the site renders — see below |
+| `_design/` | Logo masters and superseded drafts; never published, because of the underscore |
 | `Gemfile`, `Gemfile.lock` | Local previews only; GitHub Pages ignores both |
 | `LICENSE` | The MIT licence text, and nothing else, so it is detected as MIT |
 | `NOTICE` | What that licence covers and does not, plus the theme and font attributions |
@@ -27,6 +29,20 @@ homepage is [`index.md`](index.md).
 The theme is [Dinky](https://github.com/pages-themes/dinky), pinned via
 `remote_theme: pages-themes/dinky@v0.2.0`. Everything in `assets/css/style.scss`
 loads *after* the theme, so overrides win on source order alone.
+
+Dinky's stylesheet itself is **vendored** at `_sass/jekyll-theme-dinky.scss`,
+and `style.scss` imports it by that name rather than as `{{ site.theme }}`. The
+copy is the upstream file with a single line deleted — its
+`@import url(...fonts.googleapis.com...)` for Arvo, which was the last thing on
+the site reaching a third party and could not be removed from outside, since a
+CSS `@import` is always fetched and Sass cannot suppress one declared by a file
+it imports. Importing by name is what makes the shadowing work: the site's
+`_sass` is searched before the theme's, whereas the theme's own placeholder
+resolved the name next to itself.
+
+> [!IMPORTANT]
+> If `remote_theme` is ever moved off `v0.2.0`, re-vendor that file from the new
+> tag. Otherwise the site silently keeps serving v0.2.0's rules.
 
 ## Adding a page
 
@@ -45,14 +61,23 @@ loads *after* the theme, so overrides win on source order alone.
 
 ## Logos
 
+Artwork is split by directory, and that split is the whole point: `assets/img/`
+is published, `_design/` never is, because Jekyll skips directories whose names
+begin with an underscore.
+
 | File | Role |
 | --- | --- |
-| `logo6-fixed-390.png` | Light mode, rendered in the footer |
-| `logo6-dark-390.png` | Dark mode, rendered in the footer |
-| `logo6-fixed-512.png` | Light mode, used only as the `og:image` social card |
-| `logo6-dark-512.png` | Dark mode counterpart of the above, currently unreferenced |
-| `logo6-fixed.png`, `logo6-dark.png` | Full-resolution sources (1254px) |
-| `logo1`–`logo5`, `logo6` | Superseded drafts, excluded from the build |
+| `assets/img/logo-light-390.png` | Light mode, rendered in the footer |
+| `assets/img/logo-dark-390.png` | Dark mode, rendered in the footer |
+| `assets/img/logo-light-512.png` | The `og:image` social card |
+| `_design/logo6-fixed.png`, `logo6-dark.png` | The 1254px masters everything is derived from |
+| `_design/logo6-dark-512.png` | Dark counterpart of the social card, unreferenced |
+| `_design/logo1`–`logo5`, `logo6` | Superseded drafts |
+
+`_config.yml` used to carry nine `exclude:` lines for this artwork, and the list
+defaulted to publishing: a draft dropped in the wrong place went live until
+somebody noticed. Nothing needs remembering now — put working files in
+`_design/`, and only what the site renders in `assets/img/`.
 
 The dark variant is the light one with its lightness remapped in HLS; hue,
 gradient direction and alpha are preserved, so it is the same mark rather than
@@ -76,7 +101,7 @@ A 180x180 pair used to sit alongside these, declared for bookmarks and
 high-DPI tabs. Watching the network showed nothing ever requested it -- the
 32px file serves the tab and iOS takes the touch icon -- so it was removed.
 
-Both sizes are derived from the 1254px masters in `logo/`, and two things about
+Both sizes are derived from the 1254px masters in `_design/`, and two things about
 that derivation are easy to get wrong:
 
 - **A plain area-average downscale destroys the mark.** The wireframe is
