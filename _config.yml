@@ -23,15 +23,29 @@ description: Competition on Automated Reasoning for Quantum
 form_url: https://forms.gle/9AzNbS1FyJps6jRk6
 
 # Social preview. jekyll-seo-tag turns page.image into og:image and
-# twitter:image, and makes it absolute against the url below; without it a
-# shared link renders as a bare text card. Set through Jekyll's defaults so it
-# applies to every page, since seo-tag reads page.image and not a site-level
-# key. A page can still override it in its own front matter.
+# twitter:image and makes it absolute against the url below; without it a shared
+# link renders as a bare text card. Set through Jekyll's defaults so it applies
+# to every page, since seo-tag reads page.image and not a site-level key. A page
+# can still override it in its own front matter.
+#
+# 1200x630 rather than the square logo that was here first. That is the size
+# every platform crops toward, so a square either gets letterboxed or has its
+# edges taken off; this card is composed for the shape, with the sphere, the
+# wordmark and the tagline. Declaring the dimensions lets a crawler lay out the
+# card before it has fetched the image.
 defaults:
   - scope:
       path: ""
     values:
-      image: /assets/img/logo-light-512.png
+      image:
+        path: /assets/img/social-card.png
+        width: 1200
+        height: 630
+
+# Without this, jekyll-seo-tag emits twitter:card = summary, which renders the
+# thumbnail small and square and wastes a card built for 1200x630.
+twitter:
+  card: summary_large_image
 
 # On Pages this is supplied by site.github, so canonical and og:url are already
 # correct in production. Setting it explicitly makes a local build emit the same

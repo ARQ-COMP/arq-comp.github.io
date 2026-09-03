@@ -69,9 +69,9 @@ begin with an underscore.
 | --- | --- |
 | `assets/img/logo-light-390.png` | Light mode, rendered in the footer |
 | `assets/img/logo-dark-390.png` | Dark mode, rendered in the footer |
-| `assets/img/logo-light-512.png` | The `og:image` social card |
+| `assets/img/social-card.png` | The `og:image` social card, composed for 1200×630 |
 | `_design/logo6-fixed.png`, `logo6-dark.png` | The 1254px masters everything is derived from |
-| `_design/logo6-dark-512.png` | Dark counterpart of the social card, unreferenced |
+| `_design/logo-light-512.png`, `logo6-dark-512.png` | Square 512px exports, unreferenced since the card replaced them |
 | `_design/logo1`–`logo5`, `logo6` | Superseded drafts |
 
 `_config.yml` used to carry nine `exclude:` lines for this artwork, and the list
