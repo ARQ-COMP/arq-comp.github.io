@@ -422,6 +422,20 @@ p.header.site-title {
   padding-bottom: 5px;
 }
 
+/* The tagline under it. Dinky sizes p.header at 16px (256) but sets no leading,
+   so it inherited the body's 1.7 -- leading tuned for paragraphs of running
+   text, which measured 27.2px here and left the two wrapped lines of
+   "Competition on Automated Reasoning for Quantum" further apart than the words
+   within them. It is a label, not prose: 1.35 closes the lines to 21.6px and
+   lets the phrase read as one unit, while staying a shade airier than the 30px
+   title above, since smaller type wants proportionally more leading, not less.
+
+   Scoped away from .site-title, which sets its own leading and would not be
+   touched either way -- the :not() says so at the point of reading. */
+header p.header:not(.site-title) {
+  line-height: 1.35;
+}
+
 /* Skip link. Off-screen until focused rather than display:none, which cannot
    be focused at all, and rather than width/height:1px, which some screen
    readers announce oddly. On focus it lands in the top-left corner over the
