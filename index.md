@@ -48,8 +48,9 @@ The Competition on Automated Reasoning for Quantum.
 ## Communication
 
 Announcements and discussion happen on the
-[ARQ-COMP mailing list](https://groups.google.com/g/arq-comp) — subscribe there
-to follow the competition.
+[ARQ-COMP mailing list](https://groups.google.com/g/arq-comp). Subscribe on that
+page to follow the competition, or by sending an email to
+[arq-comp+subscribe@googlegroups.com](mailto:arq-comp+subscribe@googlegroups.com).
 
 ## News
 
