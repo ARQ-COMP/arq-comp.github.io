@@ -60,5 +60,5 @@ page to follow the competition, or by
 
 - [Johannes K. Fichte](https://liu.se/en/employee/johfi52)
 - [Ondřej Lengál](https://ondrik.github.io/)
-- [Matthew Sutcliffe](https://github.com/mjsutcliffe99)
+- [Matthew Sutcliffe](https://www.matthewsutcliffe.com/)
 - ...
