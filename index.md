@@ -59,4 +59,5 @@ to follow the competition.
 
 - [Johannes K. Fichte](https://liu.se/en/employee/johfi52)
 - [Ondřej Lengál](https://ondrik.github.io/)
+- [Matthew Sutcliff](https://github.com/mjsutcliffe99)
 - ...
