@@ -20,7 +20,13 @@ title: ARQ-COMP
 
 # ARQ-COMP 2027
 
-The Competition on Automated Reasoning for Quantum.
+ARQ-Comp is a friendly, community-driven competition for automated reasoning
+about quantum circuits and programs. It aims to establish common formats and an
+open benchmark library, identify new challenging benchmarks that push the
+limits of current tools, provide a reproducible snapshot of the state of the
+art in simulation, equivalence checking, and verification, and bring together
+researchers and users across formal methods, quantum computing, and the natural
+sciences.
 
 ## Important Dates
 
@@ -61,4 +67,3 @@ page to follow the competition, or by
 - [Johannes K. Fichte](https://liu.se/en/employee/johfi52)
 - [Ondřej Lengál](https://ondrik.github.io/)
 - [Matthew Sutcliffe](https://www.matthewsutcliffe.com/)
-- ...
