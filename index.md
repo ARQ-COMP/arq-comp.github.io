@@ -46,7 +46,7 @@ sciences.
   <tbody>
     <tr>
       <td><a href="{{ '/submit-benchmarks/' | relative_url }}">Call for problems/<wbr>benchmarks/<wbr>comments</a></td>
-      <td>30 September 2026</td>
+      <td><s>30 September 2026</s> (extended)</td>
     </tr>
   </tbody>
 </table>

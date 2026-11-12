@@ -14,7 +14,7 @@ A competition of tools for quantum is being set up, and its shape is still
 open. This call gathers the input needed to define it.
 
 **[Send your input through the form]({{ site.form_url }})** — the deadline is
-**30 September 2026**.
+~~**30 September 2026**.~~ (extended)
 
 ## What the call is asking for
 
