@@ -20,7 +20,7 @@ title: ARQ-COMP
 
 # ARQ-COMP 2027
 
-ARQ-COMP is a friendly, community-driven competition for automated reasoning
+**ARQ-COMP** is a friendly, community-driven competition for automated reasoning
 about quantum circuits and programs. It aims to establish common formats and an
 open benchmark library, identify new challenging benchmarks that push the
 limits of current tools, provide a reproducible snapshot of the state of the
