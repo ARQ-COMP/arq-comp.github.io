@@ -29,7 +29,7 @@ aims to:
 * **Pose new challenging problems.** Identify reasoning tasks about quantum
   circuits and programs that current tools cannot yet handle, and introduce
   them to the community as open challenges for future tool development.
-* ** Provide an independent snapshot of the state of the art.** Evaluate tools
+* **Provide an independent snapshot of the state of the art.** Evaluate tools
   on equal terms, with transparent rules and fully reproducible results, so
   that users can choose the right tool and researchers can see where the real
   bottlenecks lie.

@@ -24,8 +24,9 @@
 - label: Home
   url: /
 
+- label: About
+  url: /about/
+
 - label: Call for problems/<wbr>benchmarks/<wbr>comments
   url: /submit-benchmarks/
 
-- label: About
-  url: /about/
